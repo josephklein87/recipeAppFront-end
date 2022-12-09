@@ -5,7 +5,7 @@ import axios from 'axios';
 import Recipe from './component/part.js';
 
 function App() {
-  
+
   const [recipes, setRecipes] = useState([])
   const [newName, setNewName] = useState('')
   const [newImage, setNewImage] = useState('')
@@ -77,7 +77,7 @@ function App() {
   useEffect(()=> {
     axios.get('http://localhost:3000/recipe')
     .then((res)=> {
-      setAnimals(res.data)
+      setRecipes(res.data)
     })
   }, [])
 
