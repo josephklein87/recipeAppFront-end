@@ -11,8 +11,8 @@ const Recipe = (props)=>{
         <p>Main Ingredient: {props.recipe.mainIngredient}</p>
         <p>Nationality: {props.recipe.nationality}</p>
         <div className="card-body">
-          <p>Vegetarian? <input type="checkbox" /> </p>
-          <p>Spicy? <input type="checkbox" /> </p>
+          <p>Vegetarian? <input type="checkbox" defaultChecked={props.recipe.vegetarian} disabled/> </p>
+          <p>Spicy? <input type="checkbox" defaultChecked={props.recipe.vegetarian} disabled/> </p>
         </div>
         <div className="card-body">
           <a href={props.recipe.link} className="btn btn-info">link</a>
