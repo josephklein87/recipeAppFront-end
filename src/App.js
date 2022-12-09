@@ -75,7 +75,7 @@ function App() {
   useEffect(()=> {
     axios.get('http://localhost:3000/recipe')
     .then((res)=> {
-      setAnimals(res.data)
+      setRecipes(res.data)
     })
   }, [])
 
