@@ -5,14 +5,15 @@ import axios from 'axios';
 
 function App() {
   
+  const [recipes, setRecipes] = useState([])
   const [newName, setNewName] = useState('')
   const [newImage, setNewImage] = useState('')
   const [newTime, setNewTime] = useState(0)
-  const [vegetarian, setNewVegetarian] = useState(false)
-  const [spicy, setNewSpicy] = useState(false)
-  const [nationality, setNewNationality] = useState("")
-  const [ingredient, setNewIngredient] = useState("")
-  const [link, setNewLink] = useState("")
+  const [newVegetarian, setNewVegetarian] = useState(false)
+  const [newSpicy, setNewSpicy] = useState(false)
+  const [newNationality, setNewNationality] = useState("")
+  const [newIngredient, setNewIngredient] = useState("")
+  const [newLink, setNewLink] = useState("")
   // const [filter, setFilter] =useState([])
 
   const handleNewNameChange = (e) => {
@@ -35,20 +36,50 @@ function App() {
   }
 
   const handleNewSpicyChange = (e) => {
-    setNewSpicy(e.target.value)
+    setNewSpicy(e.target.checked)
   }
 
   const handleNewVegetarianChange = (e) => {
-    setNewVegetarian(e.target.value)
+    setNewVegetarian(e.target.checked)
   }
 
   const handleNewNationalityChange = (e) => {
     setNewNationality(e.target.value)
   }
 
-  const handleNewRecipeSubmit = () => {
+  const handleNewRecipeSubmit = (e) => {
+    e.preventDefault();
 
+    axios.post(
+      'http://localhost:3000/recipe',
+      {
+        name: newName,
+        image : newImage,
+        timeToPrepare: newTime,
+        mainIngredient: newIngredient,
+        nationality: newNationality,
+        link: newLink,
+        vegetarian: newVegetarian,
+        spicy: newSpicy
+      }
+    ).then(()=>{
+      axios
+        .get('http://localhost:3000/recipe')
+        .then((res)=>{
+          setRecipes(res.data)
+        })
+    })
+    e.target.reset()
   }
+
+  useEffect(()=> {
+    axios.get('http://localhost:3000/recipe')
+    .then((res)=> {
+      setAnimals(res.data)
+    })
+  }, [])
+
+
 
   return (
     <div>
