@@ -2,9 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import Recipe from './component/part.js';
 
 function App() {
-  
+
   const [newName, setNewName] = useState('')
   const [newImage, setNewImage] = useState('')
   const [newTime, setNewTime] = useState(0)
@@ -13,6 +14,7 @@ function App() {
   const [nationality, setNewNationality] = useState("")
   const [ingredient, setNewIngredient] = useState("")
   const [link, setNewLink] = useState("")
+  const [recipes,setRecipes] = ([]);
   // const [filter, setFilter] =useState([])
 
   const handleNewNameChange = (e) => {
@@ -65,6 +67,18 @@ function App() {
       <div className='form-row'>spicy? <input type="checkbox" onChange={handleNewSpicyChange} /></div><br/>
       <input className='new-recipe-submit' type="submit" value="Post Recipe!"/>
       </form>
+
+      <div>
+        {
+          recipes.map((recipe)=>{
+            return <>
+              <Recipe recipe={recipe}/>
+            </>
+          })
+
+          }
+      </div>
+
     </div>
   )
 }
