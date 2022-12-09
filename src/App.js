@@ -100,11 +100,10 @@ function App() {
       <input className='new-recipe-submit' type="submit" value="Post Recipe!"/>
       </form>
 
-      <div>
+      <div className='recipe-container'>
         {
           recipes.map((recipe)=>{
             return <>
-              
               <Recipe recipe={recipe} setRecipes={setRecipes}/>
             </>
           })
