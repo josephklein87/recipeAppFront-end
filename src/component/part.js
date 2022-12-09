@@ -47,12 +47,12 @@ const Recipe = (props)=>{
           <a href={props.recipe.link} className="btn btn-info">link</a>
           <button className="btn btn-primary" onClick={revealUpdate}>Edit</button>
           <button className="btn btn-danger"  onClick={()=> {deleteRecipe(props.recipe)}}>Delete</button>
-         </div>
+       </div>
+       </div>
        </div>
       }
     </div>
   )
-
 }
 
 export default Recipe;
