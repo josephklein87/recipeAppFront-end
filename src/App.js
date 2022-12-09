@@ -17,6 +17,7 @@ function App() {
   const [newLink, setNewLink] = useState("")
 
   // const [filter, setFilter] =useState([])
+  
 
   const handleNewNameChange = (e) => {
     setNewName(e.target.value)
@@ -103,7 +104,8 @@ function App() {
         {
           recipes.map((recipe)=>{
             return <>
-              <Recipe recipe={recipe}/>
+              
+              <Recipe recipe={recipe} setRecipes={setRecipes}/>
             </>
           })
 
