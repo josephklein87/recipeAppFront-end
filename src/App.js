@@ -103,7 +103,8 @@ function App() {
         {
           recipes.map((recipe)=>{
             return <>
-              <Recipe recipe={recipe}/>
+              
+              <Recipe recipe={recipe} setRecipes={setRecipes}/>
             </>
           })
 
