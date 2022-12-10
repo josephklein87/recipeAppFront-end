@@ -3,9 +3,15 @@ import './App.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import Recipe from './component/part.js';
+import UserName from './component/userCreate';
 
 function App() {
 
+  // user states
+  const [user, setUser] = useState(null) 
+
+
+  // recipe index states
   const [recipes, setRecipes] = useState([])
   const [newName, setNewName] = useState('')
   const [newImage, setNewImage] = useState('')
@@ -86,6 +92,7 @@ function App() {
 
   return (
     <div>
+      <UserName user={user} setUser={setUser} />
       <h1>YES, CHEF!</h1>
       <h2>a database of deliciousness</h2>
       <form onSubmit={handleNewRecipeSubmit}>
