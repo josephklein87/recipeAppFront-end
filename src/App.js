@@ -2,9 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import Recipe from './component/part.js';
 
 function App() {
-  
+
   const [recipes, setRecipes] = useState([])
   const [newName, setNewName] = useState('')
   const [newImage, setNewImage] = useState('')
@@ -14,7 +15,9 @@ function App() {
   const [newNationality, setNewNationality] = useState("")
   const [newIngredient, setNewIngredient] = useState("")
   const [newLink, setNewLink] = useState("")
+
   // const [filter, setFilter] =useState([])
+  
 
   const handleNewNameChange = (e) => {
     setNewName(e.target.value)
@@ -75,7 +78,7 @@ function App() {
   useEffect(()=> {
     axios.get('http://localhost:3000/recipe')
     .then((res)=> {
-      setAnimals(res.data)
+      setRecipes(res.data)
     })
   }, [])
 
@@ -96,6 +99,19 @@ function App() {
       <div className='form-row'>spicy? <input type="checkbox" onChange={handleNewSpicyChange} /></div><br/>
       <input className='new-recipe-submit' type="submit" value="Post Recipe!"/>
       </form>
+
+      <div>
+        {
+          recipes.map((recipe)=>{
+            return <>
+              
+              <Recipe recipe={recipe} setRecipes={setRecipes}/>
+            </>
+          })
+
+          }
+      </div>
+
     </div>
   )
 }
