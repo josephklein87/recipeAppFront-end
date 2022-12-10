@@ -99,7 +99,7 @@ function App() {
 
   return (
     <div>
-      <UserBar setShowSignUp = {setShowSignUp} setShowLogin={setShowLogin} showSignUp= {showSignUp} showLogin={showLogin}/>
+      <UserBar setShowSignUp = {setShowSignUp} setShowLogin={setShowLogin} showSignUp= {showSignUp} showLogin={showLogin} user={user}/>
       {(showLogin) ? <UserLogin user={user} setUser={setUser} /> : null }
       {(showSignUp) ? <UserName user={user} setUser={setUser} /> : null }
       <h1>YES, CHEF!</h1>
