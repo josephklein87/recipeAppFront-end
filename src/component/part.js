@@ -8,10 +8,10 @@ const Recipe = (props)=>{
     const [showUpdateForm, setShowUpdateForm] = useState(false)
 
     const revealUpdate = () => {
-      {(showUpdateForm) ? setShowUpdateForm(false) : setShowUpdateForm(true)}  
+      {(showUpdateForm) ? setShowUpdateForm(false) : setShowUpdateForm(true)}
     }
 
-    
+
 
     const deleteRecipe= (recipeData) => {
       console.log(recipeData)
@@ -20,7 +20,7 @@ const Recipe = (props)=>{
           props.setRecipes(response.data)
         })
       })
-    
+
     }
 
 
