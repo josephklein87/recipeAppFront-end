@@ -5,9 +5,6 @@
   
   const UserName = () => {
   
-  
-  const [loginUsername, setLoginUsername] = useState('')
-  const [loginPassword, setLoginPassword] = useState('')
   const [createUser, setCreateUser] = useState('')
   const [createPassword, setCreatePassword] = useState('')
 

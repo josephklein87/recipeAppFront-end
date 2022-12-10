@@ -4,11 +4,12 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import Recipe from './component/part.js';
 import UserName from './component/userCreate';
+import UserLogin from './component/userLogin';
 
 function App() {
 
   // user states
-  const [user, setUser] = useState(null) 
+  const [user, setUser] = useState({}) 
 
 
   // recipe index states
@@ -92,7 +93,13 @@ function App() {
 
   return (
     <div>
+      {(user.username) ?
+      <h1> Hello {user.username}</h1>
+      :
+      null
+      }
       <UserName user={user} setUser={setUser} />
+      <UserLogin user={user} setUser={setUser} />
       <h1>YES, CHEF!</h1>
       <h2>a database of deliciousness</h2>
       <form onSubmit={handleNewRecipeSubmit}>
