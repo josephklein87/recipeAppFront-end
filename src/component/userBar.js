@@ -27,7 +27,6 @@ const UserBar = (props) => {
             <button onClick={toggleUserLogin}>log in</button>
 
         </div>
-
     )
 
 }
