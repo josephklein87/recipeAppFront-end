@@ -3,9 +3,22 @@ import './App.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import Recipe from './component/part.js';
+import UserName from './component/userCreate';
+import UserLogin from './component/userLogin';
+import UserBar from './component/userBar';
 
 function App() {
 
+  // user states
+  const [user, setUser] = useState({}) 
+
+  //user login / user create modal states
+
+  const [showSignUp, setShowSignUp] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
+
+
+  // recipe index states
   const [recipes, setRecipes] = useState([])
   const [newName, setNewName] = useState('')
   const [newImage, setNewImage] = useState('')
@@ -109,7 +122,13 @@ function App() {
 
   return (
     <div>
+      {(user.username) ? <h1>Hello {user.username}</h1> : null}
+      <UserBar setShowSignUp = {setShowSignUp} setShowLogin={setShowLogin} showSignUp= {showSignUp} showLogin={showLogin} user={user}/>
+      {(showLogin) ? <UserLogin user={user} setUser={setUser} /> : null }
+      {(showSignUp) ? <UserName user={user} setUser={setUser} /> : null }
+
       <div className="submit-form">
+
       <h1>YES, CHEF!</h1>
       <h2>a database of deliciousness</h2>
       <form onSubmit={handleNewRecipeSubmit}>
