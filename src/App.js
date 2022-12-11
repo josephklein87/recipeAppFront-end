@@ -10,7 +10,7 @@ import UserBar from './component/userBar';
 function App() {
 
   // user states
-  const [user, setUser] = useState({}) 
+  const [user, setUser] = useState({})
 
   //user login / user create modal states
 
@@ -29,7 +29,10 @@ function App() {
   const [newIngredient, setNewIngredient] = useState("")
   const [newLink, setNewLink] = useState("")
   const [newSearch, setNewSearch] = useState("")
-  // const [filter, setFilter] =useState([])
+
+  const [newVeganFilter, setNewVeganFilter] = useState(false)
+  const [newSpicyFilter, setNewSpicyFilter] = useState(false)
+  const [filter, setFilter] = useState([])
 
 
   const handleNewNameChange = (e) => {
@@ -103,10 +106,40 @@ function App() {
   })
   }
 
-  const handleAllShow =(e)=>{
+  const handleClearSearch =(e)=>{
     e.preventDefault();
     axios.get('http://localhost:3000/recipe')
       .then((res)=>{
+        setRecipes(res.data)
+      })
+  }
+
+  const handleFilterVegan =(e)=>{
+    axios.get('http://localhost:3000/recipe/vegan')
+      .then((res)=>{
+        setRecipes(res.data)
+      })
+
+  }
+  const handleFilterSpicy =(e)=>{
+    axios.get('http://localhost:3000/recipe/spicy')
+      .then((res)=>{
+        setRecipes(res.data)
+      })
+  }
+  // const handleFilterRequest =(e)=>{
+  //   e.preventDefault();
+  //   axios.post('http://localhost:3000/filter',
+  //     {
+  //       filter: setFilter
+  //     }).then ((res)=>{
+  //       setFilter(res.data)
+  //     })
+  // }
+  const handleClearFilter =(e)=>{
+    e.preventDefault();
+    axios.get('http://localhost:3000/recipe',
+      ).then((res)=>{
         setRecipes(res.data)
       })
   }
@@ -150,10 +183,17 @@ function App() {
             <input type="submit" value="Search" />
       </form>
 
-      <form onSubmit={handleAllShow}>
+      <form onSubmit={handleClearSearch}>
           <input type="submit" value="Clear Search"/>
       </form>
       </div>
+
+      <div className="filter-function">
+          <button onClick={handleFilterVegan}>Vegetarian</button>
+          <button onClick={handleFilterSpicy}>Spicy</button>
+          <button onClick={handleClearFilter}>Clear Filter</button>
+      </div>
+
 
       <div className='recipe-container'>
         {
