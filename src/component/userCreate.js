@@ -3,7 +3,7 @@
   import axios from 'axios';
   import '../App.css';
   
-  const UserName = () => {
+  const UserName = (props) => {
   
   const [createUser, setCreateUser] = useState('')
   const [createPassword, setCreatePassword] = useState('')
@@ -31,17 +31,23 @@
     })
   }
 
+  const closeModal = () => {
+    props.setShowSignUp(false)
+  }
 
 
   return (
-      <div>
+    <div className="create-acc-main-container">
+      <div className='create-acc-div'>
+        <button className='btn btn-danger close-modal' onClick={closeModal}>x</button>
         <h1>create account</h1>
         <form onSubmit={handleUserCreate}>
         username<input type="text" name="user" onChange={handleNewUsernameChange}/><br/>
         password<input type="text" password="password" onChange={handleNewPasswordChange} /><br/>
         <input type="submit" value="submit" />
         </form>
-        </div>
+      </div>
+    </div>
   )
 }
 

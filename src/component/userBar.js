@@ -23,8 +23,8 @@ const UserBar = (props) => {
     return (
         <div className='user-header'>
 
-            <button onClick={toggleUserSignup}>create an account</button>
-            <button onClick={toggleUserLogin}>log in</button>
+            <button className="btn btn-secondary create-acc-btn" onClick={toggleUserSignup}>create an account</button>
+            <button className ="btn btn-secondary login-btn" onClick={toggleUserLogin}>log in</button>
 
         </div>
     )
