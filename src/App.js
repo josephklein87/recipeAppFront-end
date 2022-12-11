@@ -130,6 +130,7 @@ function App() {
 
       <h1>YES, CHEF!</h1>
       <h2>a database of deliciousness</h2>
+      <br/>
       <form onSubmit={handleNewRecipeSubmit}>
         <div className='form-row'>name: <br/><input className="form-control" type="text" placeholder='enter recipe name here' onChange={handleNewNameChange}/></div><br/>
         <div className='form-row'>image url: <br/><input className="form-control" type="text" placeholder='enter image url here' onChange={handleNewImageChange} /></div><br/>
@@ -143,6 +144,7 @@ function App() {
         </div>
         <input className='btn btn-primary new-recipe-submit' type="submit" value="Post Recipe!"/>
       </form>
+      <br/>
       </div>
 
       <div className="search-function">
