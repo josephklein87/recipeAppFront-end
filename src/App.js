@@ -122,26 +122,29 @@ function App() {
 
   return (
     <div>
-      {(user.username) ? <h1>Hello {user.username}</h1> : null}
-      <UserBar setShowSignUp = {setShowSignUp} setShowLogin={setShowLogin} showSignUp= {showSignUp} showLogin={showLogin} user={user}/>
-      {(showLogin) ? <UserLogin user={user} setUser={setUser} /> : null }
-      {(showSignUp) ? <UserName user={user} setUser={setUser} /> : null }
+      <UserBar setShowSignUp = {setShowSignUp} setShowLogin={setShowLogin} showSignUp= {showSignUp} showLogin={showLogin} user={user} setUser={setUser}/>
+      {(showLogin) ? <UserLogin user={user} setUser={setUser} setShowLogin={setShowLogin}/> : null }
+      {(showSignUp) ? <UserName user={user} setUser={setUser} setShowSignUp={setShowSignUp} setShowLogin = {setShowLogin} showLogin= {showLogin}/> : null }
 
       <div className="submit-form">
 
       <h1>YES, CHEF!</h1>
       <h2>a database of deliciousness</h2>
+      <br/>
       <form onSubmit={handleNewRecipeSubmit}>
-      <div className='form-row'>name: <br/><input type="text" placeholder='enter recipe name here' onChange={handleNewNameChange}/></div><br/>
-      <div className='form-row'>image url: <br/><input type="text" placeholder='enter image url here' onChange={handleNewImageChange} /></div><br/>
-      <div className='form-row'>time to prepare: <br/><input type="text" placeholder='enter time in minutes here' onChange={handleNewTimeChange} /></div><br/>
-      <div className='form-row'>main ingredient: <br/><input type="text" placeholder='enter main ingredient here' onChange={handleNewIngredientChange} /></div><br/>
-      <div className='form-row'>nationality: <br/><input type="text" placeholder="enter recipe nationality here" onChange={handleNewNationalityChange} /></div><br/>
-      <div className='form-row'>link to recipe: <br/><input type="text" placeholder="enter link to recipe here" onChange={handleNewLinkChange} /></div><br/>
-      <div className='form-row'>vegetarian? <input type="checkbox" onChange={handleNewVegetarianChange} /></div><br/>
-      <div className='form-row'>spicy? <input type="checkbox" onChange={handleNewSpicyChange} /></div><br/>
-      <input className='new-recipe-submit' type="submit" value="Post Recipe!"/>
+        <div className='form-row'>name: <br/><input className="form-control" type="text" placeholder='enter recipe name here' onChange={handleNewNameChange}/></div><br/>
+        <div className='form-row'>image url: <br/><input className="form-control" type="text" placeholder='enter image url here' onChange={handleNewImageChange} /></div><br/>
+        <div className='form-row'>time to prepare: <br/><input className="form-control" type="text" placeholder='enter time in minutes here' onChange={handleNewTimeChange} /></div><br/>
+        <div className='form-row'>main ingredient: <br/><input className="form-control" type="text" placeholder='enter main ingredient here' onChange={handleNewIngredientChange} /></div><br/>
+        <div className='form-row'>nationality: <br/><input className="form-control" type="text" placeholder="enter recipe nationality here" onChange={handleNewNationalityChange} /></div><br/>
+        <div className='form-row'>link to recipe: <br/><input className="form-control" type="text" placeholder="enter link to recipe here" onChange={handleNewLinkChange} /></div><br/>
+        <div className='form-row veggie-spicy'>
+          <div className='veggie'>vegetarian? <input type="checkbox" onChange={handleNewVegetarianChange} /></div>
+          <div className='spicy'>spicy? <input type="checkbox" onChange={handleNewSpicyChange} /></div>
+        </div>
+        <input className='btn btn-primary new-recipe-submit' type="submit" value="Post Recipe!"/>
       </form>
+      <br/>
       </div>
 
       <div className="search-function">

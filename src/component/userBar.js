@@ -19,13 +19,25 @@ const UserBar = (props) => {
         }
     }
 
+    const handleLogOut = () => {
+        props.setUser({})
+    }
+
 
     return (
         <div className='user-header'>
 
-            <button onClick={toggleUserSignup}>create an account</button>
-            <button onClick={toggleUserLogin}>log in</button>
-
+            {(props.user.username) ? 
+                <div className='user-header'>
+                    <p>logged in: {props.user.username}</p>
+                    <button className='btn btn-danger' onClick={handleLogOut}>logout</button>
+                </div>
+            :
+            <div className='user-header'>
+                <button className="btn btn-secondary create-acc-btn" onClick={toggleUserSignup}>create an account</button>
+                <button className ="btn btn-secondary login-btn" onClick={toggleUserLogin}>log in</button>
+                </div>
+            }
         </div>
     )
 
