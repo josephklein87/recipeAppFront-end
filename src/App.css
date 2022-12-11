@@ -2,13 +2,24 @@ body {
   text-align: center;
 }
 
-.display{
-  margin:.5em;
+.submit-form{
+  background-image: url(https://www.cordonbleu.edu/Files/MediaFile/58300.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.search-function{
+  display:flex;
+  margin:1em;
+  justify-content: center;
 }
 
 .card-body{
   display:flex;
   justify-content: space-evenly;
+  padding: 0 0 .5em 0;
 }
 
 .recipe-container {
@@ -18,9 +29,16 @@ body {
 
 .card {
   margin: .5em;
-  height: 614px;
 }
+div.card{
+  height:40%;
+}
+
 
 .btn {
   height: 38px;
+}
+
+.card-img-top{
+  height:170px;
 }
