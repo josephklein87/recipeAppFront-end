@@ -46,8 +46,13 @@ div.card{
 .user-header {
   display: flex;
   justify-content: flex-end;
+  align-items: baseline;
   padding: 5px 0;
   background-color: rgb(187, 193, 250);
+}
+
+.user-header p {
+  margin: 0 10px;
 }
 
 .create-acc-btn, .login-btn {
@@ -58,7 +63,7 @@ div.card{
   position: fixed;
   left: 0;
   right: 0;
-  top: 35%;
+  top: 32%;
   margin: 0 auto;
   
   background-color: white;
@@ -88,4 +93,20 @@ div.card{
   position: absolute;
   top: 5px;
   right: 5px;
+}
+
+.create-acc-header {
+  margin-bottom: 20px;
+}
+
+.create-acc-div p {
+  text-align: left;
+  margin: 0;
+}
+
+.error-message {
+  position: absolute;
+  bottom: 59px;
+  text-align: center;
+  left: 20%;
 }
