@@ -40,8 +40,11 @@ const Recipe = (props)=>{
         <p>Main Ingredient: {props.recipe.mainIngredient}</p>
         <p>Nationality: {props.recipe.nationality}</p>
         <div className="card-body">
-          <p>Vegetarian? <input type="checkbox" defaultChecked={props.recipe.vegetarian} disabled/> </p>
-          <p>Spicy? <input type="checkbox" defaultChecked={props.recipe.vegetarian} disabled/> </p>
+          {(props.recipe.vegetarian) ? <img className='veg-symbol' src="https://i.imgur.com/qI58tSq.png"/> : null}
+          {(props.recipe.spicy) ? <img className='veg-symbol' src="https://i.imgur.com/H3taGMI.png"/> : null}
+
+          {/* <p>Vegetarian? <input type="checkbox" defaultChecked={props.recipe.vegetarian} disabled/> </p>
+          <p>Spicy? <input type="checkbox" defaultChecked={props.recipe.vegetarian} disabled/> </p> */}
         </div>
         <div className="card-body">
           <a href={props.recipe.link} className="btn btn-info">link</a>

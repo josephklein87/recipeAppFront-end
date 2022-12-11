@@ -138,3 +138,9 @@ div.card{
   margin: 40px auto !important;
   text-align: center !important;
 }
+
+.veg-symbol {
+  width: 40px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
