@@ -15,9 +15,9 @@ function App() {
   const [newNationality, setNewNationality] = useState("")
   const [newIngredient, setNewIngredient] = useState("")
   const [newLink, setNewLink] = useState("")
-
+  const [newSearch, setNewSearch] = useState("")
   // const [filter, setFilter] =useState([])
-  
+
 
   const handleNewNameChange = (e) => {
     setNewName(e.target.value)
@@ -75,6 +75,29 @@ function App() {
     e.target.reset()
   }
 
+  const handleNewSearch =(e)=>{
+    setNewSearch(e.target.value)
+  }
+
+  const handleSearchRequest =(e)=>{
+    e.preventDefault()
+    axios.post('http://localhost:3000/recipe/search',
+    {
+      search: newSearch
+    }
+  ).then((res)=>{
+    setRecipes(res.data)
+  })
+  }
+
+  const handleAllShow =(e)=>{
+    e.preventDefault();
+    axios.get('http://localhost:3000/recipe')
+      .then((res)=>{
+        setRecipes(res.data)
+      })
+  }
+
   useEffect(()=> {
     axios.get('http://localhost:3000/recipe')
     .then((res)=> {
@@ -86,6 +109,7 @@ function App() {
 
   return (
     <div>
+      <div className="submit-form">
       <h1>YES, CHEF!</h1>
       <h2>a database of deliciousness</h2>
       <form onSubmit={handleNewRecipeSubmit}>
@@ -99,6 +123,18 @@ function App() {
       <div className='form-row'>spicy? <input type="checkbox" onChange={handleNewSpicyChange} /></div><br/>
       <input className='new-recipe-submit' type="submit" value="Post Recipe!"/>
       </form>
+      </div>
+
+      <div className="search-function">
+      <form onSubmit={handleSearchRequest}>
+            <input type="text" className="searchbar" placeholder="Search Here" onChange={handleNewSearch} />
+            <input type="submit" value="Search" />
+      </form>
+
+      <form onSubmit={handleAllShow}>
+          <input type="submit" value="Clear Search"/>
+      </form>
+      </div>
 
       <div className='recipe-container'>
         {
