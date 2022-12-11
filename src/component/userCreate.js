@@ -4,6 +4,8 @@
   import '../App.css';
   
   const UserName = (props) => {
+
+  //states for user creation
   
   const [createUser, setCreateUser] = useState('')
   const [createPassword, setCreatePassword] = useState('')
@@ -11,9 +13,51 @@
   const [error, setError] = useState("")
   const [accountCreated, setAccountCreated] = useState(false)
 
+
+  //sets the value of the username creation state
+
   const handleNewUsernameChange = (e) => {
     setCreateUser(e.target.value)
   }
+
+  //sets the value of the password creation state
+
+ const handleNewPasswordChange = (e) => {
+    setCreatePassword(e.target.value)
+  }
+
+  //closes the modal for the user create form
+ const closeModal = () => {
+    props.setShowSignUp(false)
+    setAccountCreated(false)
+  }
+
+
+//reveals the login form after successful account creation
+  const revealLogin = () => {
+    props.setShowLogin(true)
+  }
+
+
+  //creates the user in the database with an axios request
+const handleUserCreate = (e) => {
+    e.preventDefault();
+    console.log(createUser)
+    console.log(createPassword)
+    axios.post(
+      'http://localhost:3000/user/newUser',
+      {
+        username: createUser,
+        password: createPassword
+      }
+    ).then((res)=>{
+      console.log(res.data)
+      setAccountCreated(true)
+    })
+  }
+
+
+// function to check the username's availability against the database
 
   const usernameAvailabilityCheck = (e)=> {
     axios
@@ -33,35 +77,8 @@
   }})
   }
 
-  const handleNewPasswordChange = (e) => {
-    setCreatePassword(e.target.value)
-  }
-
-  const handleUserCreate = (e) => {
-    e.preventDefault();
-    console.log(createUser)
-    console.log(createPassword)
-    axios.post(
-      'http://localhost:3000/user/newUser',
-      {
-        username: createUser,
-        password: createPassword
-      }
-    ).then((res)=>{
-      console.log(res.data)
-      setAccountCreated(true)
-    })
-  }
-
-  const closeModal = () => {
-    props.setShowSignUp(false)
-    setAccountCreated(false)
-  }
-
-  const revealLogin = () => {
-    props.setShowLogin(true)
-  }
-
+ 
+  
 
   return (
     <div className="create-acc-main-container">
