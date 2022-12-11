@@ -9,6 +9,7 @@
   const [createPassword, setCreatePassword] = useState('')
   const [button, setButton] = useState(false)
   const [error, setError] = useState("")
+  const [accountCreated, setAccountCreated] = useState(false)
 
   const handleNewUsernameChange = (e) => {
     setCreateUser(e.target.value)
@@ -48,11 +49,17 @@
       }
     ).then((res)=>{
       console.log(res.data)
+      setAccountCreated(true)
     })
   }
 
   const closeModal = () => {
     props.setShowSignUp(false)
+    setAccountCreated(false)
+  }
+
+  const revealLogin = () => {
+    props.setShowLogin(true)
   }
 
 
@@ -60,15 +67,25 @@
     <div className="create-acc-main-container">
       <div className='create-acc-div'>
         <button className='btn btn-danger close-modal' onClick={closeModal}>x</button>
-        <h1 className="create-acc-header">create account</h1>
-        <form className='form-group' onSubmit={handleUserCreate}>
-        <p>username:</p>
-        <input className="form-control" type="text" name="user" onChange={handleNewUsernameChange} onKeyUp={usernameAvailabilityCheck}/><br/>
-        <p>password:</p>
-        <input className="form-control" type="password" name="password" onChange={handleNewPasswordChange} /><br/>
-        <p className='error-message'>{error}</p>
-        {(button) ? <input className='btn btn-primary' type="submit" value="submit" disabled/> : <input className='btn btn-primary' type="submit" value="submit" />}
-        </form>
+        {(accountCreated) ? 
+          <div>
+            <p className='account-creation-message'>Your account has been created.</p>
+            <button className='btn btn-primary' onClick={()=>{closeModal();revealLogin()}}>login</button>
+          </div>
+        :
+        <div>
+          <h1 className="create-acc-header">create account</h1>
+          <form className='form-group' onSubmit={handleUserCreate}>
+            <p>username:</p>
+            <input className="form-control" type="text" name="user" onChange={handleNewUsernameChange} onKeyUp={usernameAvailabilityCheck}/><br/>
+            <p>password:</p>
+            <input className="form-control" type="password" name="password" onChange={handleNewPasswordChange} /><br/>
+            <p className='error-message'>{error}</p>
+          {(button) ? <input className='btn btn-primary' type="submit" value="submit" disabled/> : <input className='btn btn-primary' type="submit" value="submit" />}
+          </form>
+        </div>
+
+        }
       </div>
     </div>
   )

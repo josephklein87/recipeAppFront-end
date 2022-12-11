@@ -10,6 +10,27 @@ body {
   color: white;
 }
 
+.form-row {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.veggie-spicy {
+  display: flex;
+  justify-content: center;
+}
+
+.veggie, .spicy {
+  margin: 10px;
+}
+
+.new-recipe-submit {
+  margin: 1em;
+
+}
+
 .search-function{
   display:flex;
   margin:1em;
@@ -25,6 +46,7 @@ body {
 .recipe-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card {
@@ -107,6 +129,12 @@ div.card{
 .error-message {
   position: absolute;
   bottom: 59px;
-  text-align: center;
-  left: 20%;
+  text-align: center !important;
+  left: 0;
+  width: 100%;
+}
+
+.account-creation-message {
+  margin: 40px auto !important;
+  text-align: center !important;
 }
