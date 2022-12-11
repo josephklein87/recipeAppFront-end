@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import '../App.css';
 import axios from 'axios';
 import EditForm from './editform';
@@ -28,7 +28,7 @@ const Recipe = (props)=>{
   return(
     <div>
       {(showUpdateForm) ?
-      < EditForm recipe={props.recipe} revealUpdate={revealUpdate} />
+      < EditForm recipe={props.recipe} revealUpdate={revealUpdate} setRecipes={props.setRecipes} />
 
       :
 
