@@ -74,11 +74,12 @@ const EditForm = (props)=>{
                 })
             })
           }
-    
+
 
 
 return(
-    <div>
+    <div className="edit-main-container">
+      <div className="edit-div">
         <form className="edit-form" onSubmit={handleUpdatedRecipe} >
         <div className='form-row'>name: <br/><input type="text" defaultValue={props.recipe.name} onChange={handleUpdatedNameChange}/></div><br/>
         <div className='form-row'>image url: <br/><input type="text" defaultValue={props.recipe.image} onChange={handleUpdatedImageChange} /></div><br/>
@@ -86,11 +87,13 @@ return(
         <div className='form-row'>main ingredient: <br/><input type="text" defaultValue={props.recipe.mainIngredient} onChange={handleUpdatedIngredientChange} /></div><br/>
         <div className='form-row'>nationality: <br/><input type="text" defaultValue={props.recipe.nationality} onChange={handleUpdatedNationalityChange} /></div><br/>
         <div className='form-row'>link to recipe: <br/><input type="text" defaultValue={props.recipe.link} onChange={handleUpdatedLinkChange} /></div><br/>
-        <div className='form-row'>vegetarian? <input type="checkbox" defaultChecked ={props.recipe.vegetarian} onClick={handleUpdatedVegetarianChange} /></div><br/>
-        <div className='form-row'>spicy? <input type="checkbox" defaultChecked = {props.recipe.spicy} onClick={handleUpdatedSpicyChange} /></div><br/>
-        <button className="submit-edit-button submit-button" type='submit'>Submit Edits</button>
-        <button className='back-button' onClick={props.revealUpdate}>Back</button>
+        <div className='form-row'>vegetarian? <input type="checkbox" defaultChecked ={props.recipe.vegetarian} onChange={handleUpdatedVegetarianChange} /></div><br/>
+        <div className='form-row'>spicy? <input type="checkbox" defaultChecked = {props.recipe.spicy} onChange={handleUpdatedSpicyChange} /></div><br/>
+        <button className="submit-edit-button submit-button btn btn-primary" type='submit'>Submit Edits</button>
+        <button className='back-button btn btn-dark' onClick={props.revealUpdate}>Back</button>
+
         </form>
+      </div>
     </div>
 )
 

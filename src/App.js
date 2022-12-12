@@ -156,6 +156,12 @@ function App() {
         setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/spicy')
       })
   }
+
+  // const handleFilterMore =(e)=>{
+  //   axios.get('https://localhost3000/recipe/time=<30')
+  //     .then((res)=>{
+  //       setRecipes(res.data)
+
   // const handleFilterRequest =(e)=>{
   //   e.preventDefault();
   //   axios.post('https://polar-forest-73812.herokuapp.com/filter',
@@ -163,6 +169,7 @@ function App() {
   //       filter: setFilter
   //     }).then ((res)=>{
   //       setFilter(res.data)
+
   //     })
   // }
   const handleClearFilter =(e)=>{
