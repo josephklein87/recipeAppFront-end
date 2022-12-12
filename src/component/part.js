@@ -23,6 +23,18 @@ const Recipe = (props)=>{
 
     }
 
+    //Functions for favorite a post
+  const addFav = (recipeData) => {
+    axios.put(`http://localhost:3000/recipe/fav/${recipeData._id}/${props.user._id}`).then((res)=>{
+      console.log(res.data)
+    })
+  }
+
+  const removeFav = (recipeData) => {
+    axios.put(`http://localhost:3000/recipe/unfav/${recipeData.recipe._id}/${props.user._id}`).then((res)=>{
+      console.log(res.data)
+    })
+  }
 
 
   return(
@@ -40,11 +52,31 @@ const Recipe = (props)=>{
         <p>Main Ingredient: {props.recipe.mainIngredient}</p>
         <p>Nationality: {props.recipe.nationality}</p>
         <div className="card-body">
-          {(props.recipe.vegetarian) ? <img className='veg-symbol' src="https://i.imgur.com/qI58tSq.png"/> : null}
-          {(props.recipe.spicy) ? <img className='veg-symbol' src="https://i.imgur.com/H3taGMI.png"/> : null}
+          <div className='spicy-veggie-icons'>
+            {(props.recipe.vegetarian) 
+            ? 
+              <img className='veg-symbol' 
+              src="https://i.imgur.com/qI58tSq.png"/> 
+            : 
+              null
+              }
 
-          {/* <p>Vegetarian? <input type="checkbox" defaultChecked={props.recipe.vegetarian} disabled/> </p>
-          <p>Spicy? <input type="checkbox" defaultChecked={props.recipe.vegetarian} disabled/> </p> */}
+            {(props.recipe.spicy) 
+            ? 
+              <img className='veg-symbol' src="https://i.imgur.com/H3taGMI.png"/> 
+            : 
+              null
+            }
+
+          </div>
+
+          {(props.recipe.favs.indexOf(props.user._id) > -1) 
+          ? 
+            <img className="heart" onClick={()=>{removeFav(props.recipe)}} src="https://i.imgur.com/wORoc2c.png" /> 
+          : 
+            <img className='heart' onClick={()=>{addFav(props.recipe)}} src="https://i.imgur.com/PjRRzBE.png"/> 
+          }
+  
         </div>
         <div className="card-body">
           <a href={props.recipe.link} className="btn btn-info">link</a>

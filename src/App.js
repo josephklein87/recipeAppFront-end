@@ -30,8 +30,8 @@ function App() {
   const [newLink, setNewLink] = useState("")
   const [newSearch, setNewSearch] = useState("")
 
-  const [newVeganFilter, setNewVeganFilter] = useState(false)
-  const [newSpicyFilter, setNewSpicyFilter] = useState(false)
+  const [VeganFilter, setVeganFilter] = useState(false)
+  const [spicyFilter, setSpicyFilter] = useState(false)
   const [filter, setFilter] = useState([])
 
 
@@ -66,12 +66,21 @@ function App() {
     setNewNationality(e.target.value)
   }
 
+  const revealLogin = () =>{
+    setShowLogin(true)
+  }
+
+  const revealSignUp = () => {
+    setShowSignUp(true)
+  }
+
   const handleNewRecipeSubmit = (e) => {
     e.preventDefault();
 
     axios.post(
       'http://localhost:3000/recipe',
       {
+        submittedBy: user.username,
         name: newName,
         image : newImage,
         timeToPrepare: newTime,
@@ -118,6 +127,7 @@ function App() {
     axios.get('http://localhost:3000/recipe/vegan')
       .then((res)=>{
         setRecipes(res.data)
+        setVeganFilter(!VeganFilter)
       })
 
   }
@@ -125,6 +135,7 @@ function App() {
     axios.get('http://localhost:3000/recipe/spicy')
       .then((res)=>{
         setRecipes(res.data)
+        setSpicyFilter(!spicyFilter)
       })
   }
   // const handleFilterRequest =(e)=>{
@@ -164,19 +175,31 @@ function App() {
       <h1>YES, CHEF!</h1>
       <h2>a database of deliciousness</h2>
       <br/>
+      {(user.username) 
+      ?
       <form onSubmit={handleNewRecipeSubmit}>
-        <div className='form-row'>name: <br/><input className="form-control" type="text" placeholder='enter recipe name here' onChange={handleNewNameChange}/></div><br/>
-        <div className='form-row'>image url: <br/><input className="form-control" type="text" placeholder='enter image url here' onChange={handleNewImageChange} /></div><br/>
-        <div className='form-row'>time to prepare: <br/><input className="form-control" type="text" placeholder='enter time in minutes here' onChange={handleNewTimeChange} /></div><br/>
-        <div className='form-row'>main ingredient: <br/><input className="form-control" type="text" placeholder='enter main ingredient here' onChange={handleNewIngredientChange} /></div><br/>
-        <div className='form-row'>nationality: <br/><input className="form-control" type="text" placeholder="enter recipe nationality here" onChange={handleNewNationalityChange} /></div><br/>
-        <div className='form-row'>link to recipe: <br/><input className="form-control" type="text" placeholder="enter link to recipe here" onChange={handleNewLinkChange} /></div><br/>
-        <div className='form-row veggie-spicy'>
-          <div className='veggie'>vegetarian? <input type="checkbox" onChange={handleNewVegetarianChange} /></div>
-          <div className='spicy'>spicy? <input type="checkbox" onChange={handleNewSpicyChange} /></div>
-        </div>
-        <input className='btn btn-primary new-recipe-submit' type="submit" value="Post Recipe!"/>
+          <div className='form-row'>name: <br/><input className="form-control" type="text" placeholder='enter recipe name here' onChange={handleNewNameChange}/></div><br/>
+          <div className='form-row'>image url: <br/><input className="form-control" type="text" placeholder='enter image url here' onChange={handleNewImageChange} /></div><br/>
+          <div className='form-row'>time to prepare: <br/><input className="form-control" type="text" placeholder='enter time in minutes here' onChange={handleNewTimeChange} /></div><br/>
+          <div className='form-row'>main ingredient: <br/><input className="form-control" type="text" placeholder='enter main ingredient here' onChange={handleNewIngredientChange} /></div><br/>
+          <div className='form-row'>nationality: <br/><input className="form-control" type="text" placeholder="enter recipe nationality here" onChange={handleNewNationalityChange} /></div><br/>
+          <div className='form-row'>link to recipe: <br/><input className="form-control" type="text" placeholder="enter link to recipe here" onChange={handleNewLinkChange} /></div><br/>
+          <div className='form-row veggie-spicy'>
+            <div className='veggie'>vegetarian? <input type="checkbox" onChange={handleNewVegetarianChange} /></div>
+            <div className='spicy'>spicy? <input type="checkbox" onChange={handleNewSpicyChange} /></div>
+          </div>
+          <input className='btn btn-primary new-recipe-submit' type="submit" value="Post Recipe!"/>
       </form>
+      : 
+      <div className='post-ternary-negative'>
+        <h4>Want to post a recipe?</h4>
+        <div className='login-or-create-div'>
+        <button className='btn btn-success' onClick={revealLogin}>Login</button>
+        <p className='or'>or</p>
+        <button className='btn btn-success' onClick={revealSignUp}>Create an Account</button>
+        </div>
+      </div>
+        }
       <br/>
       </div>
 
@@ -202,7 +225,7 @@ function App() {
         {
           recipes.map((recipe)=>{
             return <>
-              <Recipe recipe={recipe} setRecipes={setRecipes}/>
+              <Recipe recipe={recipe} setRecipes={setRecipes} user={user}/>
             </>
           })
 

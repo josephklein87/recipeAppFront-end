@@ -77,7 +77,7 @@ div.card{
   margin: 0 10px;
 }
 
-.create-acc-btn, .login-btn {
+.create-acc-btn, .login-btn, .logout-btn {
   margin-right: 1em;
 }
 
@@ -139,8 +139,43 @@ div.card{
   text-align: center !important;
 }
 
+.spicy-veggie-icons {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  text-align: right;
+}
+
 .veg-symbol {
   width: 40px;
   margin-top: 10px;
   margin-bottom: 20px;
+  margin-left: 5px;
+}
+
+.login-or-create-div {
+  display: flex;
+  justify-content: center;
+  align-items:baseline;
+}
+
+.post-ternary-negative {
+  margin-top: 60px;
+  margin-bottom: 100px;
+}
+
+.or {
+  margin: 10px;
+}
+
+.heart {
+  position: absolute;
+  width: 40px;
+  top: 10px;
+  left: 5px;
+  text-align: center;
+}
+
+.heart:hover {
+  width: 32px;
 }
