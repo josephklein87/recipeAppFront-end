@@ -27,15 +27,18 @@ const EditForm = (props)=>{
       }
 
       const handleUpdatedVegetarianChange = (e) => {
-        setUpdatedVegetarian(e.target.value)
+        setUpdatedVegetarian(e.target.checked)
+        console.log(updatedVegetarian)
       }
 
       const handleUpdatedSpicyChange= (e) => {
-        setUpdatedSpicy(e.target.value)
+        setUpdatedSpicy(e.target.checked)
+        console.log(updatedSpicy)
       }
 
       const handleUpdatedNationalityChange= (e) => {
         setUpdatedNationality(e.target.value)
+    
       }
 
       const handleUpdatedIngredientChange= (e) => {
@@ -51,7 +54,7 @@ const EditForm = (props)=>{
         console.log("This is data from update" + props.recipe._id)
         axios
         .put(
-            `http://localhost:3000/recipe/${props.recipe._id}`,
+            `https://polar-forest-73812.herokuapp.com/recipe/${props.recipe._id}`,
             {
               name: updatedName,
               image : updatedImage,
@@ -64,7 +67,7 @@ const EditForm = (props)=>{
             }
             ).then((res)=> {
               axios
-                .get('http://localhost:3000/recipe')
+                .get(props.lastSearch)
                 .then((res)=>{
                   props.setRecipes(res.data)
                   props.revealUpdate()
@@ -88,6 +91,7 @@ return(
         <div className='form-row'>spicy? <input type="checkbox" defaultChecked = {props.recipe.spicy} onChange={handleUpdatedSpicyChange} /></div><br/>
         <button className="submit-edit-button submit-button btn btn-primary" type='submit'>Submit Edits</button>
         <button className='back-button btn btn-dark' onClick={props.revealUpdate}>Back</button>
+
         </form>
       </div>
     </div>

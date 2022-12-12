@@ -1,5 +1,6 @@
 body {
   text-align: center;
+  background-color: rgb(116, 146, 227);
 }
 
 .submit-form{
@@ -33,7 +34,8 @@ body {
 
 .search-function{
   display:flex;
-  margin:1em;
+  margin-bottom: .5em;
+  margin-top: 0;
   justify-content: center;
 }
 
@@ -70,14 +72,14 @@ div.card{
   justify-content: flex-end;
   align-items: baseline;
   padding: 5px 0;
-  background-color: rgb(187, 193, 250);
+  background-color: rgb(116, 146, 227);
 }
 
 .user-header p {
   margin: 0 10px;
 }
 
-.create-acc-btn, .login-btn {
+.create-acc-btn, .login-btn, .logout-btn {
   margin-right: 1em;
 }
 
@@ -139,6 +141,7 @@ div.card{
   text-align: center !important;
 }
 
+
 /* Edit modal */
 .edit-main-container {
     position: fixed;
@@ -159,4 +162,69 @@ div.card{
   background-color: white;
   padding: 20px;
   width: 500px;
+}
+
+.spicy-veggie-icons {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  text-align: right;
+}
+
+.veg-symbol {
+  width: 40px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 5px;
+}
+
+.login-or-create-div {
+  display: flex;
+  justify-content: center;
+  align-items:baseline;
+}
+
+.post-ternary-negative {
+  margin-top: 60px;
+  margin-bottom: 100px;
+}
+
+.or {
+  margin: 10px;
+}
+
+.heart {
+  position: absolute;
+  width: 40px;
+  top: 14px;
+  left: 5px;
+  text-align: center;
+}
+
+.heart:hover {
+  width: 36px;
+  cursor: pointer;
+}
+
+.submit-form {
+  text-shadow:2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black;
+  
+}
+
+h5 {
+  margin: 0.2em;
+}
+
+.submitted-by {
+  background-color: white;
+  position: absolute;
+  left: 0px;
+  top: 148px;
+  padding: 2px 5px;
+  font-size: 12px;
+ 
+  border-bottom: none;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 0px;
+
 }

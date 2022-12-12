@@ -20,6 +20,7 @@ function App() {
 
   // recipe index states
   const [recipes, setRecipes] = useState([])
+  const [lastSearch, setLastSearch] = useState('https://polar-forest-73812.herokuapp.com/recipe')
   const [newName, setNewName] = useState('')
   const [newImage, setNewImage] = useState('')
   const [newTime, setNewTime] = useState(0)
@@ -30,8 +31,8 @@ function App() {
   const [newLink, setNewLink] = useState("")
   const [newSearch, setNewSearch] = useState("")
 
-  const [newVeganFilter, setNewVeganFilter] = useState(false)
-  const [newSpicyFilter, setNewSpicyFilter] = useState(false)
+  const [veganFilter, setVeganFilter] = useState(false)
+  const [spicyFilter, setSpicyFilter] = useState(false)
   const [filter, setFilter] = useState([])
 
 
@@ -66,12 +67,21 @@ function App() {
     setNewNationality(e.target.value)
   }
 
+  const revealLogin = () =>{
+    setShowLogin(true)
+  }
+
+  const revealSignUp = () => {
+    setShowSignUp(true)
+  }
+
   const handleNewRecipeSubmit = (e) => {
     e.preventDefault();
 
     axios.post(
-      'http://localhost:3000/recipe',
+      'https://polar-forest-73812.herokuapp.com/recipe',
       {
+        submittedBy: user.username,
         name: newName,
         image : newImage,
         timeToPrepare: newTime,
@@ -83,9 +93,10 @@ function App() {
       }
     ).then(()=>{
       axios
-        .get('http://localhost:3000/recipe')
+        .get('https://polar-forest-73812.herokuapp.com/recipe')
         .then((res)=>{
           setRecipes(res.data)
+          setLastSearch('https://polar-forest-73812.herokuapp.com/recipe')
         })
     })
     e.target.reset()
@@ -97,52 +108,88 @@ function App() {
 
   const handleSearchRequest =(e)=>{
     e.preventDefault()
-    axios.post('http://localhost:3000/recipe/search',
+    axios.post('https://polar-forest-73812.herokuapp.com/recipe/search',
     {
-      search: newSearch
+      search: newSearch,
+      spicyStatus: spicyFilter,
+      veganStatus: veganFilter
     }
   ).then((res)=>{
     setRecipes(res.data)
+    setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/search')
   })
   }
 
   const handleClearSearch =(e)=>{
     e.preventDefault();
-    axios.get('http://localhost:3000/recipe')
+    axios.get('https://polar-forest-73812.herokuapp.com/recipe')
       .then((res)=>{
         setRecipes(res.data)
+        setLastSearch("https://polar-forest-73812.herokuapp.com/recipe")
       })
   }
 
   const handleFilterVegan =(e)=>{
-    axios.get('http://localhost:3000/recipe/vegan')
+    axios.get('https://polar-forest-73812.herokuapp.com/recipe/vegan', 
+    {
+      search: newSearch,
+      spicyStatus: spicyFilter,
+      veganStatus: veganFilter
+    })
       .then((res)=>{
         setRecipes(res.data)
+        setVeganFilter(!veganFilter)
+        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/vegan')
       })
 
   }
   const handleFilterSpicy =(e)=>{
-    axios.get('http://localhost:3000/recipe/spicy')
+    axios.get('https://polar-forest-73812.herokuapp.com/recipe/spicy',
+    {
+      search: newSearch,
+      spicyStatus: spicyFilter,
+      veganStatus: veganFilter
+    })
       .then((res)=>{
         setRecipes(res.data)
+        setSpicyFilter(!spicyFilter)
+        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/spicy')
       })
   }
+
   // const handleFilterMore =(e)=>{
   //   axios.get('https://localhost3000/recipe/time=<30')
   //     .then((res)=>{
   //       setRecipes(res.data)
+
+  // const handleFilterRequest =(e)=>{
+  //   e.preventDefault();
+  //   axios.post('https://polar-forest-73812.herokuapp.com/filter',
+  //     {
+  //       filter: setFilter
+  //     }).then ((res)=>{
+  //       setFilter(res.data)
+
   //     })
   // }
   const handleClearFilter =(e)=>{
     e.preventDefault();
-    axios.get('http://localhost:3000/recipe/time=>30',
+    axios.get('https://polar-forest-73812.herokuapp.com/recipe',
       ).then((res)=>{
         setRecipes(res.data)
+        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe')
       })
   }
 
+  const handleFilterFavs = () => {
+    axios.get(`https://polar-forest-73812.herokuapp.com/recipe/favfilter/${user._id}`).then((res)=>{
+      setRecipes(res.data)
+      setLastSearch(`https://polar-forest-73812.herokuapp.com/recipe/favfilter/${user._id}`)
+    })
+  }
+
   useEffect(()=> {
-    axios.get('http://localhost:3000/recipe')
+    axios.get('https://polar-forest-73812.herokuapp.com/recipe')
     .then((res)=> {
       setRecipes(res.data)
     })
@@ -161,37 +208,51 @@ function App() {
       <h1>YES, CHEF!</h1>
       <h2>a database of deliciousness</h2>
       <br/>
+      {(user.username) 
+      ?
       <form onSubmit={handleNewRecipeSubmit}>
-        <div className='form-row'>name: <br/><input className="form-control" type="text" placeholder='enter recipe name here' onChange={handleNewNameChange}/></div><br/>
-        <div className='form-row'>image url: <br/><input className="form-control" type="text" placeholder='enter image url here' onChange={handleNewImageChange} /></div><br/>
-        <div className='form-row'>time to prepare: <br/><input className="form-control" type="text" placeholder='enter time in minutes here' onChange={handleNewTimeChange} /></div><br/>
-        <div className='form-row'>main ingredient: <br/><input className="form-control" type="text" placeholder='enter main ingredient here' onChange={handleNewIngredientChange} /></div><br/>
-        <div className='form-row'>nationality: <br/><input className="form-control" type="text" placeholder="enter recipe nationality here" onChange={handleNewNationalityChange} /></div><br/>
-        <div className='form-row'>link to recipe: <br/><input className="form-control" type="text" placeholder="enter link to recipe here" onChange={handleNewLinkChange} /></div><br/>
-        <div className='form-row veggie-spicy'>
-          <div className='veggie'>vegetarian? <input type="checkbox" onChange={handleNewVegetarianChange} /></div>
-          <div className='spicy'>spicy? <input type="checkbox" onChange={handleNewSpicyChange} /></div>
-        </div>
-        <input className='btn btn-primary new-recipe-submit' type="submit" value="Post Recipe!"/>
+        <h4>Submit a Recipe</h4>
+          <div className='form-row'>name: <br/><input className="form-control" type="text" placeholder='enter recipe name here' onChange={handleNewNameChange}/></div><br/>
+          <div className='form-row'>image url: <br/><input className="form-control" type="text" placeholder='enter image url here' onChange={handleNewImageChange} /></div><br/>
+          <div className='form-row'>time to prepare: <br/><input className="form-control" type="text" placeholder='enter time in minutes here' onChange={handleNewTimeChange} /></div><br/>
+          <div className='form-row'>main ingredient: <br/><input className="form-control" type="text" placeholder='enter main ingredient here' onChange={handleNewIngredientChange} /></div><br/>
+          <div className='form-row'>nationality: <br/><input className="form-control" type="text" placeholder="enter recipe nationality here" onChange={handleNewNationalityChange} /></div><br/>
+          <div className='form-row'>link to recipe: <br/><input className="form-control" type="text" placeholder="enter link to recipe here" onChange={handleNewLinkChange} /></div><br/>
+          <div className='form-row veggie-spicy'>
+            <div className='veggie'>vegetarian? <input type="checkbox" onChange={handleNewVegetarianChange} /></div>
+            <div className='spicy'>spicy? <input type="checkbox" onChange={handleNewSpicyChange} /></div>
+          </div>
+          <input className='btn btn-primary new-recipe-submit' type="submit" value="Post Recipe!"/>
       </form>
+      : 
+      <div className='post-ternary-negative'>
+        <h4>Want to post a recipe?</h4>
+        <div className='login-or-create-div'>
+        <button className='btn btn-success' onClick={revealLogin}>Login</button>
+        <p className='or'>or</p>
+        <button className='btn btn-success' onClick={revealSignUp}>Create an Account</button>
+        </div>
+      </div>
+        }
       <br/>
       </div>
-
+      <h5>search by text</h5>
       <div className="search-function">
       <form onSubmit={handleSearchRequest}>
             <input type="text" className="searchbar" placeholder="Search Here" onChange={handleNewSearch} />
             <input type="submit" value="Search" />
       </form>
-
       <form onSubmit={handleClearSearch}>
           <input type="submit" value="Clear Search"/>
       </form>
       </div>
+      <h5> or search by category</h5>
 
       <div className="filter-function">
+          <button onClick={handleFilterFavs} >Favorites</button>
           <button onClick={handleFilterVegan}>Vegetarian</button>
           <button onClick={handleFilterSpicy}>Spicy</button>
-          <button onClick={handleClearFilter}>Clear Filter</button>
+          <button onClick={handleClearFilter}>See All</button>
       </div>
 
 
@@ -199,7 +260,7 @@ function App() {
         {
           recipes.map((recipe)=>{
             return <>
-              <Recipe recipe={recipe} setRecipes={setRecipes}/>
+              <Recipe recipe={recipe} setRecipes={setRecipes} user={user} veganFilter={veganFilter} spicyFilter={spicyFilter} lastSearch={lastSearch}/>
             </>
           })
 

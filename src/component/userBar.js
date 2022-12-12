@@ -30,7 +30,7 @@ const UserBar = (props) => {
             {(props.user.username) ? 
                 <div className='user-header'>
                     <p>logged in: {props.user.username}</p>
-                    <button className='btn btn-danger' onClick={handleLogOut}>logout</button>
+                    <button className='btn btn-danger logout-btn' onClick={handleLogOut}>logout</button>
                 </div>
             :
             <div className='user-header'>
