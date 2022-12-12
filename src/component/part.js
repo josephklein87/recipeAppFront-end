@@ -29,8 +29,10 @@ const Recipe = (props)=>{
     <div>
       {(showUpdateForm) ?
       < EditForm recipe={props.recipe} revealUpdate={revealUpdate} setRecipes={props.setRecipes} />
+      
 
       :
+      null }
 
       <div>
        <div className="card" style={{width:"20rem"}}>
