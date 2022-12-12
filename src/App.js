@@ -221,17 +221,17 @@ function App() {
         }
       <br/>
       </div>
-
+      <h5>search by text</h5>
       <div className="search-function">
       <form onSubmit={handleSearchRequest}>
             <input type="text" className="searchbar" placeholder="Search Here" onChange={handleNewSearch} />
             <input type="submit" value="Search" />
       </form>
-
       <form onSubmit={handleClearSearch}>
           <input type="submit" value="Clear Search"/>
       </form>
       </div>
+      <h5> or search by category</h5>
 
       <div className="filter-function">
           <button onClick={handleFilterFavs} >Favorites</button>

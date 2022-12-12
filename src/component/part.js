@@ -53,6 +53,7 @@ const Recipe = (props)=>{
        <div className="card" style={{width:"20rem"}}>
         <img src={props.recipe.image} className="card-img-top"/>
         <h5 className="card-title">{props.recipe.name}</h5>
+        <p className='submitted-by'>Submitted by: {props.recipe.submittedBy}</p>
         <p>Time to prepare: {props.recipe.timeToPrepare} minutes</p>
         <p>Main Ingredient: {props.recipe.mainIngredient}</p>
         <p>Nationality: {props.recipe.nationality}</p>

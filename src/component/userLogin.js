@@ -22,6 +22,12 @@ const UserLogin = (props) => {
         console.log(loginUsername)
         console.log(loginPassword)
         e.preventDefault();
+        let userObj = {
+          username: loginUsername,
+          password: loginPassword
+        }
+        setLoginPassword("")
+        setLoginUsername("")
         axios
         .put("https://polar-forest-73812.herokuapp.com/user/userLogin",
         {
@@ -37,7 +43,7 @@ const UserLogin = (props) => {
           } else if (res.data ==="Passwords do not match.") {
             setError(res.data)
           } else {
-            props.setUser(res.data);
+            props.setUser(res.data)
             closeModal()
           }
         }

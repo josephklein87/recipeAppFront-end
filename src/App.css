@@ -34,7 +34,8 @@ body {
 
 .search-function{
   display:flex;
-  margin:1em;
+  margin-bottom: .5em;
+  margin-top: 0;
   justify-content: center;
 }
 
@@ -184,4 +185,22 @@ div.card{
 .submit-form {
   text-shadow:2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black;
   
+}
+
+h5 {
+  margin: 0.2em;
+}
+
+.submitted-by {
+  background-color: white;
+  position: absolute;
+  left: 0px;
+  top: 148px;
+  padding: 2px 5px;
+  font-size: 12px;
+ 
+  border-bottom: none;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 0px;
+
 }
