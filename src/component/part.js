@@ -16,8 +16,8 @@ const Recipe = (props)=>{
 
     const deleteRecipe= (recipeData) => {
       console.log(recipeData)
-      axios.delete(`https://polar-forest-73812.herokuapp.com/${recipeData._id}`).then(() => {
-        axios.get('https://polar-forest-73812.herokuapp.com/').then((response) => {
+      axios.delete(`https://polar-forest-73812.herokuapp.com/recipe/${recipeData._id}`).then(() => {
+        axios.get('https://polar-forest-73812.herokuapp.com/recipe').then((response) => {
           props.setRecipes(response.data)
         })
       })
@@ -26,16 +26,16 @@ const Recipe = (props)=>{
 
     //Functions for favorite a post
   const addFav = (recipeData) => {
-    axios.put(`https://polar-forest-73812.herokuapp.com/fav/${recipeData._id}/${props.user._id}`).then((res)=>{
-      axios.get('https://polar-forest-73812.herokuapp.com/').then((response) => {
+    axios.put(`https://polar-forest-73812.herokuapp.com/recipe/fav/${recipeData._id}/${props.user._id}`).then((res)=>{
+      axios.get('https://polar-forest-73812.herokuapp.com/recipe').then((response) => {
           props.setRecipes(response.data)
     })
     })
   }
 
   const removeFav = (recipeData) => {
-    axios.put(`https://polar-forest-73812.herokuapp.com/unfav/${recipeData.recipe._id}/${props.user._id}`).then((res)=>{
-      axios.get('https://polar-forest-73812.herokuapp.com/').then((response) => {
+    axios.put(`https://polar-forest-73812.herokuapp.com/recipe/unfav/${recipeData._id}/${props.user._id}`).then((res)=>{
+      axios.get('https://polar-forest-73812.herokuapp.com/recipe').then((response) => {
         props.setRecipes(response.data)
   })
   })
@@ -91,10 +91,6 @@ const Recipe = (props)=>{
        </div>
        </div>
       }
-      {/* </>
-      :
-      null
-    } */}
     </div>
   )
 }
