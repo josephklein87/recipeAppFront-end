@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import '../App.css';
 import axios from 'axios';
 import EditForm from './editform';
+import RecipeCard from './recipeCard';
 
 const Recipe = (props)=>{
 
@@ -26,21 +27,57 @@ const Recipe = (props)=>{
     //Functions for favorite a post
   const addFav = (recipeData) => {
     axios.put(`http://localhost:3000/recipe/fav/${recipeData._id}/${props.user._id}`).then((res)=>{
-      console.log(res.data)
+      axios.get('http://localhost:3000/recipe/').then((response) => {
+          props.setRecipes(response.data)
+    })
     })
   }
 
   const removeFav = (recipeData) => {
     axios.put(`http://localhost:3000/recipe/unfav/${recipeData.recipe._id}/${props.user._id}`).then((res)=>{
-      console.log(res.data)
-    })
-  }
+      axios.get('http://localhost:3000/recipe/').then((response) => {
+        props.setRecipes(response.data)
+  })
+  })
+}
 
 
   return(
     <div>
+    {/* {(props.spicyFilter===true && props.veganFilter===true) ? <>
+      {(props.recipe.vegetarian === true || props.recipe.spicy=== true) ?
+      <RecipeCard recipe={props.recipe} revealUpdate={revealUpdate} setRecipes={props.setRecipes} user={props.user} veganFilter={props.veganFilter} spicyFilter={props.spicyFilter} removeFav = {removeFav} addFav={addFav} revealUpdate = {revealUpdate} deleteRecipe={deleteRecipe} />
+      :
+      null}
+      </>
+      : 
+      null
+    }
+    {(props.spicyFilter === true && props.veganFilter===false) ? <>
+        {(props.recipe.spicy=== true) ? <>
+        <RecipeCard recipe={props.recipe} revealUpdate={revealUpdate} setRecipes={props.setRecipes} user={props.user} veganFilter={props.veganFilter} spicyFilter={props.spicyFilter} removeFav = {removeFav} addFav={addFav} revealUpdate = {revealUpdate} deleteRecipe={deleteRecipe} /> 
+        </>
+        :
+        null
+        }
+        </> 
+        :
+        null
+    }
+    {(props.veganFilter=== true && props.spicyFilter === false) ? <>
+        {(props.recipe.vegetarian=== true) ? <>
+        <RecipeCard recipe={props.recipe} revealUpdate={revealUpdate} setRecipes={props.setRecipes} user={props.user} veganFilter={props.veganFilter} spicyFilter={props.spicyFilter} removeFav = {removeFav} addFav={addFav} revealUpdate = {revealUpdate} deleteRecipe={deleteRecipe} /> 
+        </>
+        :
+        null
+        }
+        </>
+        :
+        null
+      }
+      {(props.veganFilter===false && props.spicyFilter === false ) ? <> */}
       {(showUpdateForm) ?
-      < EditForm recipe={props.recipe} revealUpdate={revealUpdate} setRecipes={props.setRecipes} />
+      < EditForm recipe={props.recipe} revealUpdate={revealUpdate} setRecipes={props.setRecipes} user={props.user} veganFilter={props.veganFilter} spicyFilter={props.spicyFilter} removeFav = {removeFav} addFav={addFav} revealUpdate = {revealUpdate} deleteRecipe={deleteRecipe} />
 
       :
 
@@ -86,6 +123,10 @@ const Recipe = (props)=>{
        </div>
        </div>
       }
+      {/* </>
+      :
+      null
+    } */}
     </div>
   )
 }

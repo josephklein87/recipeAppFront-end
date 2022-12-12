@@ -30,7 +30,7 @@ function App() {
   const [newLink, setNewLink] = useState("")
   const [newSearch, setNewSearch] = useState("")
 
-  const [VeganFilter, setVeganFilter] = useState(false)
+  const [veganFilter, setVeganFilter] = useState(false)
   const [spicyFilter, setSpicyFilter] = useState(false)
   const [filter, setFilter] = useState([])
 
@@ -108,7 +108,9 @@ function App() {
     e.preventDefault()
     axios.post('http://localhost:3000/recipe/search',
     {
-      search: newSearch
+      search: newSearch,
+      spicyStatus: spicyFilter,
+      veganStatus: veganFilter
     }
   ).then((res)=>{
     setRecipes(res.data)
@@ -124,15 +126,25 @@ function App() {
   }
 
   const handleFilterVegan =(e)=>{
-    axios.get('http://localhost:3000/recipe/vegan')
+    axios.get('http://localhost:3000/recipe/vegan', 
+    {
+      search: newSearch,
+      spicyStatus: spicyFilter,
+      veganStatus: veganFilter
+    })
       .then((res)=>{
         setRecipes(res.data)
-        setVeganFilter(!VeganFilter)
+        setVeganFilter(!veganFilter)
       })
 
   }
   const handleFilterSpicy =(e)=>{
-    axios.get('http://localhost:3000/recipe/spicy')
+    axios.get('http://localhost:3000/recipe/spicy',
+    {
+      search: newSearch,
+      spicyStatus: spicyFilter,
+      veganStatus: veganFilter
+    })
       .then((res)=>{
         setRecipes(res.data)
         setSpicyFilter(!spicyFilter)
@@ -153,6 +165,12 @@ function App() {
       ).then((res)=>{
         setRecipes(res.data)
       })
+  }
+
+  const handleFilterFavs = () => {
+    axios.get(`http://localhost:3000/recipe/favfilter/${user._id}`).then((res)=>{
+      setRecipes(res.data)
+    })
   }
 
   useEffect(()=> {
@@ -215,6 +233,7 @@ function App() {
       </div>
 
       <div className="filter-function">
+          <button onClick={handleFilterFavs} >Favorites</button>
           <button onClick={handleFilterVegan}>Vegetarian</button>
           <button onClick={handleFilterSpicy}>Spicy</button>
           <button onClick={handleClearFilter}>Clear Filter</button>
@@ -225,7 +244,7 @@ function App() {
         {
           recipes.map((recipe)=>{
             return <>
-              <Recipe recipe={recipe} setRecipes={setRecipes} user={user}/>
+              <Recipe recipe={recipe} setRecipes={setRecipes} user={user} veganFilter={veganFilter} spicyFilter={spicyFilter}/>
             </>
           })
 
