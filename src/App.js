@@ -127,18 +127,15 @@ function App() {
         setRecipes(res.data)
       })
   }
-  // const handleFilterRequest =(e)=>{
-  //   e.preventDefault();
-  //   axios.post('http://localhost:3000/filter',
-  //     {
-  //       filter: setFilter
-  //     }).then ((res)=>{
-  //       setFilter(res.data)
+  // const handleFilterMore =(e)=>{
+  //   axios.get('https://localhost3000/recipe/time=<30')
+  //     .then((res)=>{
+  //       setRecipes(res.data)
   //     })
   // }
   const handleClearFilter =(e)=>{
     e.preventDefault();
-    axios.get('http://localhost:3000/recipe',
+    axios.get('http://localhost:3000/recipe/time=>30',
       ).then((res)=>{
         setRecipes(res.data)
       })
