@@ -17,7 +17,7 @@ const Recipe = (props)=>{
     const deleteRecipe= (recipeData) => {
       console.log(recipeData)
       axios.delete(`https://polar-forest-73812.herokuapp.com/recipe/${recipeData._id}`).then(() => {
-        axios.get('https://polar-forest-73812.herokuapp.com/recipe').then((response) => {
+        axios.get(props.lastSearch).then((response) => {
           props.setRecipes(response.data)
         })
       })
@@ -27,7 +27,7 @@ const Recipe = (props)=>{
     //Functions for favorite a post
   const addFav = (recipeData) => {
     axios.put(`https://polar-forest-73812.herokuapp.com/recipe/fav/${recipeData._id}/${props.user._id}`).then((res)=>{
-      axios.get('https://polar-forest-73812.herokuapp.com/recipe').then((response) => {
+      axios.get(props.lastSearch).then((response) => {
           props.setRecipes(response.data)
     })
     })
@@ -35,7 +35,7 @@ const Recipe = (props)=>{
 
   const removeFav = (recipeData) => {
     axios.put(`https://polar-forest-73812.herokuapp.com/recipe/unfav/${recipeData._id}/${props.user._id}`).then((res)=>{
-      axios.get('https://polar-forest-73812.herokuapp.com/recipe').then((response) => {
+      axios.get(props.lastSearch).then((response) => {
         props.setRecipes(response.data)
   })
   })
@@ -45,7 +45,7 @@ const Recipe = (props)=>{
   return(
     <div>
       {(showUpdateForm) ?
-      < EditForm recipe={props.recipe} revealUpdate={revealUpdate} setRecipes={props.setRecipes} user={props.user} veganFilter={props.veganFilter} spicyFilter={props.spicyFilter} removeFav = {removeFav} addFav={addFav} revealUpdate = {revealUpdate} deleteRecipe={deleteRecipe} />
+      < EditForm recipe={props.recipe} revealUpdate={revealUpdate} setRecipes={props.setRecipes} user={props.user} veganFilter={props.veganFilter} spicyFilter={props.spicyFilter} removeFav = {removeFav} addFav={addFav} deleteRecipe={deleteRecipe} lastSearch={props.lastSearch} />
 
       :
 
@@ -65,8 +65,7 @@ const Recipe = (props)=>{
               src="https://i.imgur.com/qI58tSq.png"/> 
             : 
               null
-              }
-
+            }
             {(props.recipe.spicy) 
             ? 
               <img className='veg-symbol' src="https://i.imgur.com/H3taGMI.png"/> 
@@ -75,13 +74,18 @@ const Recipe = (props)=>{
             }
 
           </div>
-
+          {(props.user.username) ?
+          <>
           {(props.recipe.favs.indexOf(props.user._id) > -1) 
           ? 
             <img className="heart" onClick={()=>{removeFav(props.recipe)}} src="https://i.imgur.com/wORoc2c.png" /> 
           : 
             <img className='heart' onClick={()=>{addFav(props.recipe)}} src="https://i.imgur.com/PjRRzBE.png"/> 
           }
+          </>
+          :
+          null
+         }
   
         </div>
         <div className="card-body">

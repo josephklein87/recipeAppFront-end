@@ -173,13 +173,14 @@ div.card{
 .heart {
   position: absolute;
   width: 40px;
-  top: 10px;
+  top: 14px;
   left: 5px;
   text-align: center;
 }
 
 .heart:hover {
-  width: 32px;
+  width: 36px;
+  cursor: pointer;
 }
 
 .submit-form {

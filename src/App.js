@@ -20,6 +20,7 @@ function App() {
 
   // recipe index states
   const [recipes, setRecipes] = useState([])
+  const [lastSearch, setLastSearch] = useState('https://polar-forest-73812.herokuapp.com/recipe')
   const [newName, setNewName] = useState('')
   const [newImage, setNewImage] = useState('')
   const [newTime, setNewTime] = useState(0)
@@ -95,6 +96,7 @@ function App() {
         .get('https://polar-forest-73812.herokuapp.com/recipe')
         .then((res)=>{
           setRecipes(res.data)
+          setLastSearch('https://polar-forest-73812.herokuapp.com/recipe')
         })
     })
     e.target.reset()
@@ -114,6 +116,7 @@ function App() {
     }
   ).then((res)=>{
     setRecipes(res.data)
+    setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/search')
   })
   }
 
@@ -122,6 +125,7 @@ function App() {
     axios.get('https://polar-forest-73812.herokuapp.com/recipe')
       .then((res)=>{
         setRecipes(res.data)
+        setLastSearch("https://polar-forest-73812.herokuapp.com/recipe")
       })
   }
 
@@ -135,6 +139,7 @@ function App() {
       .then((res)=>{
         setRecipes(res.data)
         setVeganFilter(!veganFilter)
+        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/vegan')
       })
 
   }
@@ -148,6 +153,7 @@ function App() {
       .then((res)=>{
         setRecipes(res.data)
         setSpicyFilter(!spicyFilter)
+        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/spicy')
       })
   }
   // const handleFilterRequest =(e)=>{
@@ -164,12 +170,14 @@ function App() {
     axios.get('https://polar-forest-73812.herokuapp.com/recipe',
       ).then((res)=>{
         setRecipes(res.data)
+        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe')
       })
   }
 
   const handleFilterFavs = () => {
     axios.get(`https://polar-forest-73812.herokuapp.com/recipe/favfilter/${user._id}`).then((res)=>{
       setRecipes(res.data)
+      setLastSearch(`https://polar-forest-73812.herokuapp.com/recipe/favfilter/${user._id}`)
     })
   }
 
@@ -245,7 +253,7 @@ function App() {
         {
           recipes.map((recipe)=>{
             return <>
-              <Recipe recipe={recipe} setRecipes={setRecipes} user={user} veganFilter={veganFilter} spicyFilter={spicyFilter}/>
+              <Recipe recipe={recipe} setRecipes={setRecipes} user={user} veganFilter={veganFilter} spicyFilter={spicyFilter} lastSearch={lastSearch}/>
             </>
           })
 

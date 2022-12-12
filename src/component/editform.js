@@ -54,7 +54,7 @@ const EditForm = (props)=>{
         console.log("This is data from update" + props.recipe._id)
         axios
         .put(
-            `https://polar-forest-73812.herokuapp.com/${props.recipe._id}`,
+            `https://polar-forest-73812.herokuapp.com/recipe/${props.recipe._id}`,
             {
               name: updatedName,
               image : updatedImage,
@@ -67,7 +67,7 @@ const EditForm = (props)=>{
             }
             ).then((res)=> {
               axios
-                .get('https://polar-forest-73812.herokuapp.com/recipe')
+                .get(props.lastSearch)
                 .then((res)=>{
                   props.setRecipes(res.data)
                   props.revealUpdate()
