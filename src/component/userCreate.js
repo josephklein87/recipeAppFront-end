@@ -42,14 +42,15 @@
   //creates the user in the database with an axios request
 const handleUserCreate = (e) => {
     e.preventDefault();
-    console.log(createUser)
-    console.log(createPassword)
+    let userObj = {
+      username: createUser,
+      password: createPassword
+    }
+    setCreateUser("")
+    setCreatePassword("")
     axios.post(
-      'http://localhost:3000/user/newUser',
-      {
-        username: createUser,
-        password: createPassword
-      }
+      'https://polar-forest-73812.herokuapp.com/user/newUser',
+      userObj
     ).then((res)=>{
       console.log(res.data)
       setAccountCreated(true)
@@ -61,7 +62,7 @@ const handleUserCreate = (e) => {
 
   const usernameAvailabilityCheck = (e)=> {
     axios
-      .get("http://localhost:3000/user/userList")
+      .get("https://polar-forest-73812.herokuapp.com/user/userList")
       .then((res)=>{
         console.log(res)
       for (let i=0; i < res.data.length; i++) {
