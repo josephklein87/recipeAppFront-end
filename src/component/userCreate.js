@@ -45,7 +45,7 @@ const handleUserCreate = (e) => {
     console.log(createUser)
     console.log(createPassword)
     axios.post(
-      'http://localhost:3000/user/newUser',
+      'https://polar-forest-73812.herokuapp.com/user/newUser',
       {
         username: createUser,
         password: createPassword
@@ -61,7 +61,7 @@ const handleUserCreate = (e) => {
 
   const usernameAvailabilityCheck = (e)=> {
     axios
-      .get("http://localhost:3000/user/userList")
+      .get("https://polar-forest-73812.herokuapp.com/user/userList")
       .then((res)=>{
         console.log(res)
       for (let i=0; i < res.data.length; i++) {
