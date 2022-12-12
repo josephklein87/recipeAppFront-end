@@ -1,5 +1,6 @@
 body {
   text-align: center;
+  background-color: rgb(116, 146, 227);
 }
 
 .submit-form{
@@ -70,7 +71,7 @@ div.card{
   justify-content: flex-end;
   align-items: baseline;
   padding: 5px 0;
-  background-color: rgb(187, 193, 250);
+  background-color: rgb(116, 146, 227);
 }
 
 .user-header p {
@@ -178,4 +179,9 @@ div.card{
 
 .heart:hover {
   width: 32px;
+}
+
+.submit-form {
+  text-shadow:2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black;
+  
 }

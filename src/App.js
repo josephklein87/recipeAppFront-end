@@ -196,6 +196,7 @@ function App() {
       {(user.username) 
       ?
       <form onSubmit={handleNewRecipeSubmit}>
+        <h4>Submit a Recipe</h4>
           <div className='form-row'>name: <br/><input className="form-control" type="text" placeholder='enter recipe name here' onChange={handleNewNameChange}/></div><br/>
           <div className='form-row'>image url: <br/><input className="form-control" type="text" placeholder='enter image url here' onChange={handleNewImageChange} /></div><br/>
           <div className='form-row'>time to prepare: <br/><input className="form-control" type="text" placeholder='enter time in minutes here' onChange={handleNewTimeChange} /></div><br/>
@@ -236,7 +237,7 @@ function App() {
           <button onClick={handleFilterFavs} >Favorites</button>
           <button onClick={handleFilterVegan}>Vegetarian</button>
           <button onClick={handleFilterSpicy}>Spicy</button>
-          <button onClick={handleClearFilter}>Clear Filter</button>
+          <button onClick={handleClearFilter}>See All</button>
       </div>
 
 
