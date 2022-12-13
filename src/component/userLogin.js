@@ -19,8 +19,6 @@ const UserLogin = (props) => {
     }
 
     const loginUser = (e) => {
-        console.log(loginUsername)
-        console.log(loginPassword)
         e.preventDefault();
         let userObj = {
           username: loginUsername,
@@ -59,9 +57,9 @@ const UserLogin = (props) => {
     return (
       <div className="create-acc-main-container">
       <div className='create-acc-div'>
+        <button className='btn btn-danger close-modal' onClick={closeModal}>x</button>
         <h1 className='create-acc-header'>login to account</h1>
         <form className="form-group" onSubmit={loginUser}>
-        <button className='btn btn-danger close-modal' onClick={closeModal}>x</button>
         <p>username:</p> <input className='form-control' type="text" name="username" onChange={handleNewLoginNameChange}/><br/>
         <p>password:</p> <input className='form-control'type="password" name="password" onChange={handleNewLoginPasswordChange} /><br/>
         <p className='error-message'>{error}</p>
