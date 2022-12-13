@@ -4,49 +4,40 @@ import axios from 'axios';
 
 const EditForm = (props)=>{
 
-    const [updatedName, setUpdatedName] = useState('')
-    const [updatedImage, setUpdatedImage] = useState('')
-    const [updatedTime, setUpdatedTime] = useState(0)
-    const [updatedVegetarian, setUpdatedVegetarian] = useState(false)
-    const [updatedSpicy, setUpdatedSpicy] = useState(false)
-    const [updatedNationality, setUpdatedNationality] = useState('')
-    const [updatedIngredient, setUpdatedIngredient] = useState("")
-    const [updatedLink, setUpdatedLink] = useState("")
-
     const handleUpdatedNameChange = (e) => {
-        console.log(updatedName)
-        setUpdatedName(e.target.value)
+        console.log(props.updatedName)
+        props.setUpdatedName(e.target.value)
       }
 
       const handleUpdatedImageChange = (e) => {
-        setUpdatedImage(e.target.value)
+        props.setUpdatedImage(e.target.value)
       }
 
       const handleUpdatedTimeChange = (e) => {
-        setUpdatedTime(e.target.value)
+        props.setUpdatedTime(e.target.value)
       }
 
       const handleUpdatedVegetarianChange = (e) => {
-        setUpdatedVegetarian(e.target.checked)
-        console.log(updatedVegetarian)
+        props.setUpdatedVegetarian(e.target.checked)
+        console.log(props.updatedVegetarian)
       }
 
       const handleUpdatedSpicyChange= (e) => {
-        setUpdatedSpicy(e.target.checked)
-        console.log(updatedSpicy)
+        props.setUpdatedSpicy(e.target.checked)
+        console.log(props.updatedSpicy)
       }
 
       const handleUpdatedNationalityChange= (e) => {
-        setUpdatedNationality(e.target.value)
+        props.setUpdatedNationality(e.target.value)
     
       }
 
       const handleUpdatedIngredientChange= (e) => {
-        setUpdatedIngredient(e.target.value)
+        props.setUpdatedIngredient(e.target.value)
       }
 
       const handleUpdatedLinkChange= (e) => {
-        setUpdatedLink(e.target.value)
+        props.setUpdatedLink(e.target.value)
       }
 
       const handleUpdatedRecipe = (e) => {
@@ -56,14 +47,14 @@ const EditForm = (props)=>{
         .put(
             `https://polar-forest-73812.herokuapp.com/recipe/${props.recipe._id}`,
             {
-              name: updatedName,
-              image : updatedImage,
-              timeToPrepare: updatedTime,
-              mainIngredient: updatedIngredient,
-              nationality: updatedNationality,
-              link: updatedLink,
-              vegetarian: updatedVegetarian,
-              spicy: updatedSpicy
+              name: props.updatedName,
+              image : props.updatedImage,
+              timeToPrepare: props.updatedTime,
+              mainIngredient: props.updatedIngredient,
+              nationality: props.updatedNationality,
+              link: props.updatedLink,
+              vegetarian: props.updatedVegetarian,
+              spicy: props.updatedSpicy
             }
             ).then((res)=> {
               axios

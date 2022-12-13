@@ -8,6 +8,15 @@ const Recipe = (props)=>{
 
     const [showUpdateForm, setShowUpdateForm] = useState(false)
 
+    const [updatedName, setUpdatedName] = useState('')
+    const [updatedImage, setUpdatedImage] = useState('')
+    const [updatedTime, setUpdatedTime] = useState(0)
+    const [updatedVegetarian, setUpdatedVegetarian] = useState(false)
+    const [updatedSpicy, setUpdatedSpicy] = useState(false)
+    const [updatedNationality, setUpdatedNationality] = useState('')
+    const [updatedIngredient, setUpdatedIngredient] = useState("")
+    const [updatedLink, setUpdatedLink] = useState("")
+
     const revealUpdate = () => {
       {(showUpdateForm) ? setShowUpdateForm(false) : setShowUpdateForm(true)}
     }
@@ -41,11 +50,41 @@ const Recipe = (props)=>{
   })
 }
 
+const holdValue = ()=> {
+setUpdatedName(props.recipe.name)
+setUpdatedImage(props.recipe.image)
+setUpdatedLink(props.recipe.link)
+setUpdatedIngredient(props.recipe.ingredient)
+setUpdatedNationality(props.recipe.nationality)
+setUpdatedTime(props.recipe.timeToPrepare)
+setUpdatedSpicy(props.recipe.spicy)
+setUpdatedVegetarian(props.recipe.vegetarian)
+}
+
 
   return(
     <div>
       {(showUpdateForm) ?
-      < EditForm recipe={props.recipe} revealUpdate={revealUpdate} setRecipes={props.setRecipes} user={props.user} veganFilter={props.veganFilter} spicyFilter={props.spicyFilter} removeFav = {removeFav} addFav={addFav} deleteRecipe={deleteRecipe} lastSearch={props.lastSearch} />
+      < EditForm recipe={props.recipe} 
+      setRecipes={props.setRecipes}
+      revealUpdate={revealUpdate} 
+      lastSearch={props.lastSearch} 
+      updatedName={updatedName} 
+      setUpdatedName={setUpdatedName} 
+      updatedImage={updatedImage} 
+      setUpdatedImage={setUpdatedImage} 
+      updatedLink={updatedLink} 
+      setUpdatedLink={setUpdatedLink} 
+      updatedIngredient={updatedIngredient} 
+      setUpdatedIngredient={setUpdatedIngredient} 
+      updatedNationality={updatedNationality} 
+      setUpdatedNationality={setUpdatedNationality}
+      updatedTime={updatedTime}
+      setUpdatedTime={setUpdatedTime}
+      updatedSpicy={updatedSpicy}
+      setUpdatedSpicy={setUpdatedSpicy}
+      updatedVegetarian={updatedVegetarian}
+      setUpdatedVegetarian={setUpdatedVegetarian}/>
 
       :
 
@@ -90,7 +129,7 @@ const Recipe = (props)=>{
         </div>
         <div className="card-body">
           <a href={props.recipe.link} className="btn btn-info">link</a>
-          <button className="btn btn-primary" onClick={revealUpdate}>Edit</button>
+          <button className="btn btn-primary" onClick={()=>{revealUpdate(); holdValue()} }>Edit</button>
           <button className="btn btn-danger"  onClick={()=> {deleteRecipe(props.recipe)}}>Delete</button>
        </div>
        </div>
