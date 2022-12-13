@@ -125,11 +125,11 @@ function App() {
   }
 
   const handleFilterVegan =(e)=>{
-    axios.get('https://polar-forest-73812.herokuapp.com/recipe/vegan', 
+    axios.get('https://polar-forest-73812.herokuapp.com/recipe/vegan',
     {
       search: newSearch,
       spicyStatus: spicyFilter,
-      veganStatus: veganFilter
+      veganStatus: veganFilter,
     })
       .then((res)=>{
         setRecipes(res.data)
@@ -151,6 +151,7 @@ function App() {
         setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/spicy')
       })
   }
+
 
   const handleFilterMyPosts =() => {
     axios
@@ -177,12 +178,27 @@ function App() {
 
   //     })
   // }
+
+  const handleFilterLess =(e)=>{
+    axios.get('https://polar-forest-73812.herokuapp.com/recipe/timeless')
+      .then((res)=>{
+        setRecipes(res.data)
+      })
+  }
+
+  const handleFilterMore =(e)=>{
+    axios.get('https://polar-forest-73812.herokuapp.com/recipe/timemore')
+      .then((res)=>{
+        setRecipes(res.data)
+    })
+ }
+ 
   const handleClearFilter =(e)=>{
     e.preventDefault();
-    axios.get('https://polar-forest-73812.herokuapp.com/recipe',
-      ).then((res)=>{
-        setRecipes(res.data)
-        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe')
+    axios.get('https://polar-forest-73812.herokuapp.com/recipe')
+      .then((res)=>{
+        setRecipes(res.data);
+        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe');
       })
   }
 
@@ -213,7 +229,7 @@ function App() {
       <h1>YES, CHEF!</h1>
       <h2>a database of deliciousness</h2>
       <br/>
-      {(user.username) 
+      {(user.username)
       ?
       <form onSubmit={handleNewRecipeSubmit}>
         <h4>Submit a Recipe</h4>
@@ -229,7 +245,7 @@ function App() {
           </div>
           <input className='btn btn-primary new-recipe-submit' type="submit" value="Post Recipe!"/>
       </form>
-      : 
+      :
       <div className='post-ternary-negative'>
         <h4>Want to post a recipe?</h4>
         <div className='login-or-create-div'>
@@ -262,6 +278,8 @@ function App() {
           <button onClick={handleFilterFavs} >Favorites</button>
           <button onClick={handleFilterVegan}>Vegetarian</button>
           <button onClick={handleFilterSpicy}>Spicy</button>
+          <button onClick={handleFilterMore}>30+ mins</button>
+          <button onClick={handleFilterLess}>30- mins</button>
           <button onClick={handleClearFilter}>See All</button>
       </div>
 
