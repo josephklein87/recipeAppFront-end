@@ -129,7 +129,7 @@ setUpdatedVegetarian(props.recipe.vegetarian)
         </div>
         <div className="card-body">
           <a href={props.recipe.link} className="btn btn-info">link</a>
-          {(props.user.username === props.recipe.submittedBy && props.user.username !== undefined) ?
+          {((props.user.username === props.recipe.submittedBy && props.user.username !== undefined) || props.user.username==="admin") ?
           <>
             <button className="btn btn-primary" onClick={()=>{revealUpdate(); holdValue()} }>Edit</button>
             <button className="btn btn-danger"  onClick={()=> {deleteRecipe(props.recipe)}}>Delete</button>

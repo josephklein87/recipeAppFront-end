@@ -152,6 +152,16 @@ function App() {
       })
   }
 
+  const handleFilterMyPosts =() => {
+    axios
+      .get(`https://polar-forest-73812.herokuapp.com/recipe/myposts/${user.username}`)
+      .then((res)=>{
+        setRecipes(res.data)
+        setLastSearch(`https://polar-forest-73812.herokuapp.com/recipe/myposts/${user.username}`)
+
+    })
+  }
+
   // const handleFilterMore =(e)=>{
   //   axios.get('https://localhost3000/recipe/time=<30')
   //     .then((res)=>{
@@ -244,6 +254,11 @@ function App() {
       <h5> or search by category</h5>
 
       <div className="filter-function">
+          {(user.username) ?
+          <button onClick={handleFilterMyPosts}>My Posts</button>
+          :
+          null
+          }
           <button onClick={handleFilterFavs} >Favorites</button>
           <button onClick={handleFilterVegan}>Vegetarian</button>
           <button onClick={handleFilterSpicy}>Spicy</button>

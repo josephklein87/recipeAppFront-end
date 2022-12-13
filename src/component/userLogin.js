@@ -19,8 +19,6 @@ const UserLogin = (props) => {
     }
 
     const loginUser = (e) => {
-        console.log(loginUsername)
-        console.log(loginPassword)
         e.preventDefault();
         let userObj = {
           username: loginUsername,

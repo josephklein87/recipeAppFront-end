@@ -52,7 +52,6 @@ const handleUserCreate = (e) => {
       'https://polar-forest-73812.herokuapp.com/user/newUser',
       userObj
     ).then((res)=>{
-      console.log(res.data)
       setAccountCreated(true)
     })
   }
@@ -64,9 +63,7 @@ const handleUserCreate = (e) => {
     axios
       .get("https://polar-forest-73812.herokuapp.com/user/userList")
       .then((res)=>{
-        console.log(res)
       for (let i=0; i < res.data.length; i++) {
-         console.log(res.data[i].username)
        if (res.data[i].username === e.target.value) {
         setButton(true)
         setError("This username is not available!")
