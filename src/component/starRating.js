@@ -14,22 +14,6 @@ const StarRating = (props) => {
     }
     
     useEffect(()=>{
-        axios
-            .put(`http://polar-forest-73812.herokuapp.com/recipe/rating/${props.recipe._id}`,
-            {
-                user: props.user.username,
-                rating: rating
-            })
-            .then(()=>{
-                axios
-                .get(props.lastSearch).then((res)=>{
-                    props.setRecipes(res.data)
-            })
-        })
-    }, [rating]
-    )
-
-    useEffect(()=>{
         if (props.user.username) {
         let userKey = props.user.username.toString()
         console.log("this is the username: " + userKey)
@@ -37,6 +21,23 @@ const StarRating = (props) => {
         console.log("this is the data:" + props.recipe.ratings[userKey])
         }
     }, [])
+
+    useEffect(()=>{
+        axios
+            .put(`http://polar-forest-73812.herokuapp.com/recipe/rating/${props.recipe._id}`,
+            {
+                user: props.user.username,
+                rating: rating
+            })
+            .then(()=>{
+                console.log(props.lastSearch)
+                axios
+                .get(props.lastSearch).then((res)=>{
+                    props.setRecipes(res.data)
+            })
+        })
+    }, [rating]
+    )
 
 
 

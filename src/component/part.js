@@ -17,6 +17,7 @@ const Recipe = (props)=>{
     const [updatedNationality, setUpdatedNationality] = useState('')
     const [updatedIngredient, setUpdatedIngredient] = useState("")
     const [updatedLink, setUpdatedLink] = useState("")
+    const [averageRating, setAverageRating]= useState(0)
 
     const revealUpdate = () => {
       {(showUpdateForm) ? setShowUpdateForm(false) : setShowUpdateForm(true)}
@@ -39,7 +40,7 @@ const Recipe = (props)=>{
     axios.put(`https://polar-forest-73812.herokuapp.com/recipe/fav/${recipeData._id}/${props.user._id}`).then((res)=>{
       axios.get(props.lastSearch).then((response) => {
           props.setRecipes(response.data)
-    })
+      })
     })
   }
 
@@ -47,21 +48,37 @@ const Recipe = (props)=>{
     axios.put(`https://polar-forest-73812.herokuapp.com/recipe/unfav/${recipeData._id}/${props.user._id}`).then((res)=>{
       axios.get(props.lastSearch).then((response) => {
         props.setRecipes(response.data)
-  })
-  })
-}
+      })
+    })
+  }
 
-const holdValue = ()=> {
-setUpdatedName(props.recipe.name)
-setUpdatedImage(props.recipe.image)
-setUpdatedLink(props.recipe.link)
-setUpdatedIngredient(props.recipe.ingredient)
-setUpdatedNationality(props.recipe.nationality)
-setUpdatedTime(props.recipe.timeToPrepare)
-setUpdatedSpicy(props.recipe.spicy)
-setUpdatedVegetarian(props.recipe.vegetarian)
-}
+  const holdValue = ()=> {
+    setUpdatedName(props.recipe.name)
+    setUpdatedImage(props.recipe.image)
+    setUpdatedLink(props.recipe.link)
+    setUpdatedIngredient(props.recipe.ingredient)
+    setUpdatedNationality(props.recipe.nationality)
+    setUpdatedTime(props.recipe.timeToPrepare)
+    setUpdatedSpicy(props.recipe.spicy)
+    setUpdatedVegetarian(props.recipe.vegetarian)
+  }
 
+  const ratingCalculator = ()=>{
+   let total = 0
+   let ratings = props.recipe.ratings
+   console.log(ratings)
+   let ratingsArray= Object.values(ratings)
+   console.log(ratingsArray)
+    for (let i=0; i < ratingsArray.length; i++) {
+     total += ratingsArray[i]
+    }
+    setAverageRating(Math.round(total / ratingsArray.length))
+  }
+
+  useEffect(()=>{
+    ratingCalculator()
+    console.log("This is the average rating:" + averageRating)
+  }, [props.recipes])
 
   return(
     <div>
@@ -93,6 +110,13 @@ setUpdatedVegetarian(props.recipe.vegetarian)
        <div className="card" style={{width:"20rem"}}>
         <img src={props.recipe.image} className="card-img-top"/>
         <h5 className="card-title">{props.recipe.name}</h5>
+        <div className="avg-star-container">
+          {[...Array(averageRating)].map((star)=>{
+            return (
+              <span className="gold-star">&#9733;</span>
+            )
+          })}
+        </div>
         <p className='submitted-by'>Submitted by: {props.recipe.submittedBy}</p>
         <p>Time to prepare: {props.recipe.timeToPrepare} minutes</p>
         <p>Main Ingredient: {props.recipe.mainIngredient}</p>
