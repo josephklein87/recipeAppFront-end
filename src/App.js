@@ -108,15 +108,10 @@ function App() {
 
   const handleSearchRequest =(e)=>{
     e.preventDefault()
-    axios.post('https://polar-forest-73812.herokuapp.com/recipe/search',
-    {
-      search: newSearch,
-      spicyStatus: spicyFilter,
-      veganStatus: veganFilter
-    }
+    axios.get(`https://polar-forest-73812.herokuapp.com/recipe/search/${newSearch}`
   ).then((res)=>{
     setRecipes(res.data)
-    setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/search')
+    setLastSearch(`https://polar-forest-73812.herokuapp.com/recipe/search/${newSearch}`)
   })
   }
 
