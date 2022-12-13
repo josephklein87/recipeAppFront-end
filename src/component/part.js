@@ -3,6 +3,7 @@ import '../App.css';
 import axios from 'axios';
 import EditForm from './editform';
 import RecipeCard from './recipeCard';
+import StarRating from './starRating';
 
 const Recipe = (props)=>{
 
@@ -96,6 +97,14 @@ setUpdatedVegetarian(props.recipe.vegetarian)
         <p>Time to prepare: {props.recipe.timeToPrepare} minutes</p>
         <p>Main Ingredient: {props.recipe.mainIngredient}</p>
         <p>Nationality: {props.recipe.nationality}</p>
+        {props.user.username ? 
+          <>
+          <p>Your Rating:</p>
+          <StarRating recipe={props.recipe} lastSearch={props.lastSearch} user={props.user} setRecipes={props.setRecipes}/>
+          </>
+          :
+          null
+          }
         <div className="card-body">
           <div className='spicy-veggie-icons'>
             {(props.recipe.vegetarian) 
