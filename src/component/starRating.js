@@ -6,37 +6,85 @@ import React, { useState, useEffect } from "react";
 
 const StarRating = (props) => {
 
-    const [rating, setRating] = useState(0);
-    const [hover, setHover] = useState(0);
+    // sets states for ratings//
+    const [lastRating, setLastRating] = useState(0)
 
     const handleRatingRequest = (index) => {
-        setRating(index)
+        props.setRating(index)
+        console.log(props.rating)
     }
     
-    useEffect(()=>{
-        if (props.user.username) {
-        let userKey = props.user.username.toString()
-        console.log("this is the username: " + userKey)
-        setRating(props.recipe.ratings[userKey])
-        console.log("this is the data:" + props.recipe.ratings[userKey])
-        }
-    }, [])
+    //if the user is logged in it will check the database if they have a rating already for this and set the rating to that rating
+
+    // useEffect(()=>{
+    //     if (props.user.username) {
+    //     for (let i = 0; i < props.recipe.ratings.length; i++) {
+    //         if (props.recipe.ratings[i].user === props.user.username) {
+    //             props.setRating(props.recipe.ratings[i].rating)
+    //         }
+    //     }     
+    // }}, [props.recipes])
 
     useEffect(()=>{
+
+        // states for whether or not the user has made  arating before
+        let alreadyRated = false
+        let userID = 0 
+
+        //loop checks the database to see if the username is contained in the ratings key
+
+        for (let i=0; i < props.recipe.ratings.length; i++) {
+            if (props.recipe.ratings[i].user === props.user.username) {
+                alreadyRated = true
+            }
+        }
+        console.log(alreadyRated)
+
+        // if the username is not included it will send a put request to the server to push the username and the rating into the ratings key
+
+        if (props.rating !== 0 && props.rating !== null && alreadyRated===false) {
         axios
-            .put(`http://polar-forest-73812.herokuapp.com/recipe/rating/${props.recipe._id}`,
+            .put(`https://polar-forest-73812.herokuapp.com/recipe/rating/${props.recipe._id}`,
             {
                 user: props.user.username,
-                rating: rating
+                rating: props.rating
             })
             .then(()=>{
-                console.log(props.lastSearch)
                 axios
                 .get(props.lastSearch).then((res)=>{
+                    console.log(res.data)
                     props.setRecipes(res.data)
             })
         })
-    }, [rating]
+
+        //if the user is included it will pull out the old rating and update it with the new rating
+
+        } else if (props.rating !== 0 && props.rating !== null && alreadyRated===true){
+            console.log("already rated is true")
+            axios
+            .put(`https://polar-forest-73812.herokuapp.com/recipe/rating/alreadyrated/${props.recipe._id}`,
+            {
+                user: props.user.username,
+                rating: props.rating,
+            }).then(()=>{
+                axios
+                .put(`https://polar-forest-73812.herokuapp.com/recipe/rating/${props.recipe._id}`,
+                {
+                    user: props.user.username,
+                    rating: props.rating
+                })
+                .then(()=>{
+                    axios
+                    .get(props.lastSearch).then((res)=>{
+                        console.log(res.data)
+                        props.setRecipes(res.data)
+                })
+            })
+            })
+        
+    }}
+        , [props.rating]
+    
     )
 
 
@@ -51,12 +99,12 @@ const StarRating = (props) => {
             <button
               type="button"
               key={index}
-              className={index <= (hover || rating) ? "on" : "off"}
+              className={index <= (props.hover || props.rating) ? "on" : "off"}
               onClick={() => {handleRatingRequest(index)}}
-              onMouseEnter={() => setHover(index)}
-              onMouseLeave={() => setHover(rating)}
+              onMouseEnter={() => props.setHover(index)}
+              onMouseLeave={() => props.setHover(props.rating)}
             >
-              <span className="star">&#9733;</span>
+              <span className="gold-star">&#9733;</span>
             </button>
           );
         })}

@@ -183,6 +183,7 @@ function App() {
     axios.get('https://polar-forest-73812.herokuapp.com/recipe/timeless')
       .then((res)=>{
         setRecipes(res.data)
+        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/timeless')
       })
   }
 
@@ -190,6 +191,7 @@ function App() {
     axios.get('https://polar-forest-73812.herokuapp.com/recipe/timemore')
       .then((res)=>{
         setRecipes(res.data)
+        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/timemore')
     })
  }
  
@@ -208,6 +210,15 @@ function App() {
       setLastSearch(`https://polar-forest-73812.herokuapp.com/recipe/favfilter/${user._id}`)
     })
   }
+
+  const handleFilterRating = ()=>{
+    axios.get(`https://polar-forest-73812.herokuapp.com/recipe/highestrated/`).then((res)=>{
+      setRecipes(res.data)
+      setLastSearch(`https://polar-forest-73812.herokuapp.com/recipe/highestrated/`)
+    })
+
+  }
+
 
   useEffect(()=> {
     axios.get('https://polar-forest-73812.herokuapp.com/recipe')
@@ -271,11 +282,14 @@ function App() {
 
       <div className="filter-function">
           {(user.username) ?
+          <>
           <button onClick={handleFilterMyPosts}>My Posts</button>
+          <button onClick={handleFilterFavs} >Favorites</button>
+          </>
           :
           null
           }
-          <button onClick={handleFilterFavs} >Favorites</button>
+          <button onClick={handleFilterRating}>Highest Rated</button>
           <button onClick={handleFilterVegan}>Vegetarian</button>
           <button onClick={handleFilterSpicy}>Spicy</button>
           <button onClick={handleFilterMore}>30+ mins</button>
@@ -288,7 +302,7 @@ function App() {
         {
           recipes.map((recipe)=>{
             return <>
-              <Recipe recipe={recipe} setRecipes={setRecipes} user={user} veganFilter={veganFilter} spicyFilter={spicyFilter} lastSearch={lastSearch}/>
+              <Recipe recipe={recipe} recipes={recipes} setRecipes={setRecipes} user={user} veganFilter={veganFilter} spicyFilter={spicyFilter} lastSearch={lastSearch}/>
             </>
           })
 
