@@ -162,6 +162,16 @@ div.card{
   background-color: white;
   padding: 20px;
   width: 500px;
+  border-radius: 10px;
+}
+
+.form-box {
+  display:flex;
+  margin-bottom: 1em;
+}
+.input {
+  width: 80%;
+  border-radius:5px; 
 }
 
 .spicy-veggie-icons {
