@@ -84,6 +84,13 @@ const Recipe = (props)=>{
     console.log("This is the average rating:" + averageRating)
   }, [props.recipes])
 
+  useEffect(()=>{
+    axios.put(`https://polar-forest-73812.herokuapp.com/recipe/averagerating/${props.recipe._id}`,
+    {
+      avg: averageRating
+    })
+  }, [averageRating])
+
   return(
     <div>
       {(showUpdateForm) ?
