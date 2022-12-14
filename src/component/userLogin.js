@@ -36,10 +36,13 @@ const UserLogin = (props) => {
         .then((res)=>{
           if (res.data ==="There was an error.") {
             setError(res.data)
+            e.target.reset()
           } else if (res.data ==="User not found.") {
             setError(res.data)
+            e.target.reset()
           } else if (res.data ==="Passwords do not match.") {
             setError(res.data)
+            e.target.reset()
           } else {
             props.setUser(res.data)
             closeModal()

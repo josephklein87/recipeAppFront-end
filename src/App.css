@@ -229,6 +229,18 @@ h5 {
 
 }
 
+.star-rating {
+  margin-bottom: 10px;
+}
+
+.avg-star-container {
+  margin-bottom: 10px;
+}
+
+.gold-star {
+  color: gold
+}
+
 .star-rating button {
   background-color: transparent;
   border:none;
@@ -242,4 +254,8 @@ h5 {
 
 .off {
   color: #ccc;
+}
+
+.rating-p {
+  margin-bottom: 2px;
 }

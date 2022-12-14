@@ -165,7 +165,7 @@ useEffect(()=>{
         }
         console.log("this is the rating: " + rating + "of " + props.recipe.name)
     }     
-  }}, [props.recipes])
+  }}, [props.recipes, props.user])
 
 //sends a request to the server to update the average rating every time the average rating state is changed
   useEffect(()=>{
@@ -224,7 +224,7 @@ useEffect(()=>{
         <p>Nationality: {props.recipe.nationality}</p>
         {props.user.username ? 
           <>
-          <p>Your Rating:</p>
+          <p className='rating-p'>Your Rating:</p>
           <div className="star-rating">
         {[...Array(5)].map((star, index) => {
           index += 1;
@@ -237,7 +237,7 @@ useEffect(()=>{
               onMouseEnter={() => setHover(index)}
               onMouseLeave={() => setHover(props.rating)}
             >
-              <span className="gold-star">&#9733;</span>
+              <span className="star">&#9733;</span>
             </button>
           );
         })}
