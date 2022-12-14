@@ -211,6 +211,15 @@ function App() {
     })
   }
 
+  const handleFilterRating = ()=>{
+    axios.get(`https://polar-forest-73812.herokuapp.com/recipe/highestrated/`).then((res)=>{
+      setRecipes(res.data)
+      setLastSearch(`https://polar-forest-73812.herokuapp.com/recipe/highestrated/`)
+    })
+
+  }
+
+
   useEffect(()=> {
     axios.get('https://polar-forest-73812.herokuapp.com/recipe')
     .then((res)=> {
@@ -273,11 +282,14 @@ function App() {
 
       <div className="filter-function">
           {(user.username) ?
+          <>
           <button onClick={handleFilterMyPosts}>My Posts</button>
+          <button onClick={handleFilterFavs} >Favorites</button>
+          </>
           :
           null
           }
-          <button onClick={handleFilterFavs} >Favorites</button>
+          <button onClick={handleFilterRating}>Highest Rated</button>
           <button onClick={handleFilterVegan}>Vegetarian</button>
           <button onClick={handleFilterSpicy}>Spicy</button>
           <button onClick={handleFilterMore}>30+ mins</button>
