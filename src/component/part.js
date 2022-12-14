@@ -156,7 +156,7 @@ useEffect(()=>{
   }, [props.recipes])
 
 
-  // sets teh rating state
+  // sets the rating state
   useEffect(()=>{
     if (props.user.username) {
     for (let i = 0; i < props.recipe.ratings.length; i++) {
@@ -165,7 +165,7 @@ useEffect(()=>{
         }
         console.log("this is the rating: " + rating + "of " + props.recipe.name)
     }     
-}}, [props.recipes])
+  }}, [props.recipes])
 
 //sends a request to the server to update the average rating every time the average rating state is changed
   useEffect(()=>{
