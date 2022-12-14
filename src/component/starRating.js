@@ -8,35 +8,73 @@ const StarRating = (props) => {
 
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
+    const [lastRating, setLastRating] = useState(0)
 
     const handleRatingRequest = (index) => {
         setRating(index)
+        console.log(rating)
     }
     
     useEffect(()=>{
         if (props.user.username) {
-        let userKey = props.user.username.toString()
-        console.log("this is the username: " + userKey)
-        setRating(props.recipe.ratings[userKey])
-        console.log("this is the data:" + props.recipe.ratings[userKey])
-        }
-    }, [])
+        for (let i = 0; i < props.recipe.ratings.length; i++) {
+            if (props.recipe.ratings[i].user === props.user.username) {
+                setRating(props.recipe.ratings[i].rating)
+                setLastRating(props.recipe.ratings[i].rating)
+            }
+        }     
+    }}, [])
 
     useEffect(()=>{
+        let alreadyRated = false
+        let userID = 0 
+
+        for (let i=0; i < props.recipe.ratings.length; i++) {
+            if (props.recipe.ratings[i].user === props.user.username) {
+                alreadyRated = true
+            }
+        }
+        console.log(alreadyRated)
+        if (rating !== 0 && rating !== null && alreadyRated===false) {
         axios
-            .put(`http://polar-forest-73812.herokuapp.com/recipe/rating/${props.recipe._id}`,
+            .put(`https://polar-forest-73812.herokuapp.com/recipe/rating/${props.recipe._id}`,
             {
                 user: props.user.username,
                 rating: rating
             })
             .then(()=>{
-                console.log(props.lastSearch)
                 axios
                 .get(props.lastSearch).then((res)=>{
+                    console.log(res.data)
                     props.setRecipes(res.data)
             })
         })
-    }, [rating]
+        } else if (rating !== 0 && rating !== null && alreadyRated===true){
+            console.log("already rated is true")
+            axios
+            .put(`https://polar-forest-73812.herokuapp.com/recipe/rating/alreadyrated/${props.recipe._id}`,
+            {
+                user: props.user.username,
+                rating: rating,
+            }).then(()=>{
+                axios
+                .put(`https://polar-forest-73812.herokuapp.com/recipe/rating/${props.recipe._id}`,
+                {
+                    user: props.user.username,
+                    rating: rating
+                })
+                .then(()=>{
+                    axios
+                    .get(props.lastSearch).then((res)=>{
+                        console.log(res.data)
+                        props.setRecipes(res.data)
+                })
+            })
+            })
+        
+    }}
+        , [rating]
+    
     )
 
 
@@ -56,7 +94,7 @@ const StarRating = (props) => {
               onMouseEnter={() => setHover(index)}
               onMouseLeave={() => setHover(rating)}
             >
-              <span className="star">&#9733;</span>
+              <span className="gold-star">&#9733;</span>
             </button>
           );
         })}

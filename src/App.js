@@ -183,6 +183,7 @@ function App() {
     axios.get('https://polar-forest-73812.herokuapp.com/recipe/timeless')
       .then((res)=>{
         setRecipes(res.data)
+        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/timeless')
       })
   }
 
@@ -190,6 +191,7 @@ function App() {
     axios.get('https://polar-forest-73812.herokuapp.com/recipe/timemore')
       .then((res)=>{
         setRecipes(res.data)
+        setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/timemore')
     })
  }
  
@@ -288,7 +290,7 @@ function App() {
         {
           recipes.map((recipe)=>{
             return <>
-              <Recipe recipe={recipe} setRecipes={setRecipes} user={user} veganFilter={veganFilter} spicyFilter={spicyFilter} lastSearch={lastSearch}/>
+              <Recipe recipe={recipe} recipes={recipes} setRecipes={setRecipes} user={user} veganFilter={veganFilter} spicyFilter={spicyFilter} lastSearch={lastSearch}/>
             </>
           })
 

@@ -66,13 +66,17 @@ const Recipe = (props)=>{
   const ratingCalculator = ()=>{
    let total = 0
    let ratings = props.recipe.ratings
-   console.log(ratings)
-   let ratingsArray= Object.values(ratings)
-   console.log(ratingsArray)
-    for (let i=0; i < ratingsArray.length; i++) {
-     total += ratingsArray[i]
-    }
-    setAverageRating(Math.round(total / ratingsArray.length))
+
+   for (let i = 0; i < ratings.length; i++) {
+    total += ratings[i].rating
+   }
+  //  console.log(ratings)
+  //  let ratingsArray= Object.values(ratings)
+  //  console.log(ratingsArray)
+  //   for (let i=0; i < ratingsArray.length; i++) {
+  //    total += ratingsArray[i]
+  //   }
+    setAverageRating(Math.round(total / ratings.length))
   }
 
   useEffect(()=>{
@@ -111,11 +115,17 @@ const Recipe = (props)=>{
         <img src={props.recipe.image} className="card-img-top"/>
         <h5 className="card-title">{props.recipe.name}</h5>
         <div className="avg-star-container">
+          {(averageRating > 0) ?
+          <>
           {[...Array(averageRating)].map((star)=>{
             return (
               <span className="gold-star">&#9733;</span>
             )
           })}
+          </>
+          :
+          <p>No ratings yet</p>
+        }
         </div>
         <p className='submitted-by'>Submitted by: {props.recipe.submittedBy}</p>
         <p>Time to prepare: {props.recipe.timeToPrepare} minutes</p>
