@@ -18,6 +18,8 @@ const Recipe = (props)=>{
     const [updatedIngredient, setUpdatedIngredient] = useState("")
     const [updatedLink, setUpdatedLink] = useState("")
     const [averageRating, setAverageRating]= useState(0)
+    const [rating, setRating] = useState(0);
+    const [hover, setHover] = useState(0);
 
     const revealUpdate = () => {
       {(showUpdateForm) ? setShowUpdateForm(false) : setShowUpdateForm(true)}
@@ -63,6 +65,77 @@ const Recipe = (props)=>{
     setUpdatedVegetarian(props.recipe.vegetarian)
   }
 
+  const handleRatingRequest = (index) => {
+    setRating(index)
+    console.log(props.rating)
+}
+
+useEffect(()=>{
+
+  // states for whether or not the user has made  arating before
+  let alreadyRated = false
+  let userID = 0 
+  let index
+
+  //loop checks the database to see if the username is contained in the ratings key
+
+  for (let i=0; i < props.recipe.ratings.length; i++) {
+      if (props.recipe.ratings[i].user === props.user.username) {
+          alreadyRated = true
+          index = i
+      }
+  }
+  console.log(alreadyRated)
+
+  // if the username is not included it will send a put request to the server to push the username and the rating into the ratings key
+
+  if (rating !== 0 && rating !== null && alreadyRated===false) {
+  axios
+      .put(`https://polar-forest-73812.herokuapp.com/recipe/rating/${props.recipe._id}`,
+      {
+          user: props.user.username,
+          rating: rating
+      })
+      .then(()=>{
+          axios
+          .get(props.lastSearch).then((res)=>{
+              console.log(res.data)
+              props.setRecipes(res.data)
+      })
+  })
+  } else if (rating !== 0 && rating !==null && rating===props.recipe.ratings[index].rating) {
+
+    console.log("its the same")
+  //if the user is included it will pull out the old rating and update it with the new rating
+
+  } else if (rating !== 0 && rating !== null && alreadyRated===true){
+      console.log("already rated is true")
+      axios
+      .put(`https://polar-forest-73812.herokuapp.com/recipe/rating/alreadyrated/${props.recipe._id}`,
+      {
+          user: props.user.username,
+          rating: rating,
+      }).then(()=>{
+          axios
+          .put(`https://polar-forest-73812.herokuapp.com/recipe/rating/${props.recipe._id}`,
+          {
+              user: props.user.username,
+              rating: rating
+          })
+          .then(()=>{
+              axios
+              .get(props.lastSearch).then((res)=>{
+                  console.log(res.data)
+                  props.setRecipes(res.data)
+          })
+      })
+      })
+  
+}}
+  , [rating]
+
+)
+
   //adds up all the values in the ratings/rating field of the database entry and divides them by the length to get the average
 
   const ratingCalculator = ()=>{
@@ -82,6 +155,17 @@ const Recipe = (props)=>{
     console.log("This is the average rating:" + averageRating)
   }, [props.recipes])
 
+
+  // sets teh rating state
+  useEffect(()=>{
+    if (props.user.username) {
+    for (let i = 0; i < props.recipe.ratings.length; i++) {
+        if (props.recipe.ratings[i].user === props.user.username) {
+            setRating(props.recipe.ratings[i].rating)
+        }
+        console.log("this is the rating: " + rating + "of " + props.recipe.name)
+    }     
+}}, [props.recipes])
 
 //sends a request to the server to update the average rating every time the average rating state is changed
   useEffect(()=>{
@@ -141,7 +225,23 @@ const Recipe = (props)=>{
         {props.user.username ? 
           <>
           <p>Your Rating:</p>
-          <StarRating recipe={props.recipe} lastSearch={props.lastSearch} user={props.user} setRecipes={props.setRecipes}/>
+          <div className="star-rating">
+        {[...Array(5)].map((star, index) => {
+          index += 1;
+          return (
+            <button
+              type="button"
+              key={index}
+              className={index <= (hover || rating) ? "on" : "off"}
+              onClick={() => {handleRatingRequest(index)}}
+              onMouseEnter={() => setHover(index)}
+              onMouseLeave={() => setHover(props.rating)}
+            >
+              <span className="gold-star">&#9733;</span>
+            </button>
+          );
+        })}
+      </div>
           </>
           :
           null
