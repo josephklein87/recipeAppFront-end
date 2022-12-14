@@ -225,6 +225,8 @@ useEffect(()=>{
         {props.user.username ? 
           <>
           <p className='rating-p'>Your Rating:</p>
+          {/* FOLLOWED THIS TUTORIAL TO CREATE COMPONENT 
+// https://dev.to/michaelburrows/create-a-custom-react-star-rating-component-5o6 // */}
           <div className="star-rating">
         {[...Array(5)].map((star, index) => {
           index += 1;
