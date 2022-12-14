@@ -63,6 +63,8 @@ const Recipe = (props)=>{
     setUpdatedVegetarian(props.recipe.vegetarian)
   }
 
+  //adds up all the values in the ratings/rating field of the database entry and divides them by the length to get the average
+
   const ratingCalculator = ()=>{
    let total = 0
    let ratings = props.recipe.ratings
@@ -70,20 +72,18 @@ const Recipe = (props)=>{
    for (let i = 0; i < ratings.length; i++) {
     total += ratings[i].rating
    }
-  //  console.log(ratings)
-  //  let ratingsArray= Object.values(ratings)
-  //  console.log(ratingsArray)
-  //   for (let i=0; i < ratingsArray.length; i++) {
-  //    total += ratingsArray[i]
-  //   }
     setAverageRating(Math.round(total / ratings.length))
   }
+
+  //activates the rating calculator function eveery time the recipes list is changed
 
   useEffect(()=>{
     ratingCalculator()
     console.log("This is the average rating:" + averageRating)
   }, [props.recipes])
 
+
+//sends a request to the server to update the average rating every time the average rating state is changed
   useEffect(()=>{
     axios.put(`https://polar-forest-73812.herokuapp.com/recipe/averagerating/${props.recipe._id}`,
     {
