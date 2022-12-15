@@ -217,7 +217,7 @@ useEffect(()=>{
           })}
           </>
           :
-          <p>No ratings yet</p>
+          <p className='no-ratings'>(No ratings yet)</p>
         }
         </div>
         <p className='submitted-by'>Submitted by: {props.recipe.submittedBy}</p>

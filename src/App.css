@@ -309,6 +309,10 @@ h5 {
   border-color: black;
 }
 
+.no-ratings {
+  margin-bottom: 0;
+}
+
 @media (max-width: 768px) {
   .site-header {
     font-size: 80px;
