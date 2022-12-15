@@ -1,7 +1,7 @@
 # YES, CHEF!
 ## a recipe organizing and rating app by Joe Klein and Peter Wu
 
-links: 
+links: https://joepeterrecipeapp.netlify.app/
 
 The purpose of this app is for the user to be able upload recipes to the database, rate other user's recipes as well as save their favorite recipes to their account to access later.
 
