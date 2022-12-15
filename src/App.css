@@ -1,3 +1,8 @@
+@font-face {
+  font-family: veganStyle;
+  src: url(/public/LemonJellyPersonalUse-dEqR.ttf)
+}
+
 body {
   text-align: center;
   background-color: rgb(116, 146, 227);
@@ -9,6 +14,21 @@ body {
   background-size: cover;
   background-position: center;
   color: white;
+}
+
+h1 {
+  font-family: veganStyle;
+  font-size: 8vw;
+}
+
+h2 {
+  font-family: veganStyle;
+  font-size: 5vw;
+  line-height: 0;
+}
+
+.submit-recipe-header {
+  margin-top: 20px;
 }
 
 .form-row {
@@ -93,6 +113,8 @@ div.card{
   background-color: white;
   padding: 20px;
   width: 400px;
+  border-radius: 10px;
+
 }
 
 .create-acc-main-container {
@@ -172,6 +194,10 @@ div.card{
 .input {
   width: 80%;
   border-radius:5px; 
+}
+
+.submit-edit-button {
+  margin-right: 15px;
 }
 
 .spicy-veggie-icons {
