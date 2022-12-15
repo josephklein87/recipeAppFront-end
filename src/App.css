@@ -16,12 +16,12 @@ body {
   color: white;
 }
 
-h1 {
+.site-header {
   font-family: veganStyle;
   font-size: 8vw;
 }
 
-h2 {
+.site-subheader {
   font-family: veganStyle;
   font-size: 5vw;
   line-height: 0;

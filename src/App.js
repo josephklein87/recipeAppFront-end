@@ -237,8 +237,8 @@ function App() {
 
       <div className="submit-form">
 
-      <h1>Yes, Chef!</h1>
-      <h2>a database of deliciousness</h2>
+      <h1 className='site-header'>Yes, Chef!</h1>
+      <h2 className='site-subheader'>a database of deliciousness</h2>
       <br/>
       {(user.username)
       ?
