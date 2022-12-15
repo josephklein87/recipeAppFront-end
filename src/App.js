@@ -237,13 +237,13 @@ function App() {
 
       <div className="submit-form">
 
-      <h1>YES, CHEF!</h1>
-      <h2>a database of deliciousness</h2>
+      <h1 className='site-header'>Yes, Chef!</h1>
+      <h2 className='site-subheader'>a database of deliciousness</h2>
       <br/>
       {(user.username)
       ?
       <form onSubmit={handleNewRecipeSubmit}>
-        <h4>Submit a Recipe</h4>
+        <h4 className='submit-recipe-header'>Submit a Recipe</h4>
           <div className='form-row'>name: <br/><input className="form-control" type="text" placeholder='enter recipe name here' onChange={handleNewNameChange}/></div>
           <div className='form-row'>image url: <br/><input className="form-control" type="text" placeholder='enter image url here' onChange={handleNewImageChange} /></div>
           <div className='form-row'>time to prepare: <br/><input className="form-control" type="text" placeholder='enter time in minutes here' onChange={handleNewTimeChange} /></div>
@@ -260,9 +260,9 @@ function App() {
       <div className='post-ternary-negative'>
         <h4>Want to post a recipe?</h4>
         <div className='login-or-create-div'>
-        <button className='btn btn-success' onClick={revealLogin}>Login</button>
-        <p className='or'>or</p>
         <button className='btn btn-success' onClick={revealSignUp}>Create an Account</button>
+        <p className='or'>or</p>
+        <button className='btn btn-success' onClick={revealLogin}>Login</button>
         </div>
       </div>
         }

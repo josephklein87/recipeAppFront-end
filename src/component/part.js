@@ -169,10 +169,12 @@ useEffect(()=>{
 
 //sends a request to the server to update the average rating every time the average rating state is changed
   useEffect(()=>{
+    if (averageRating !== 0) {
     axios.put(`https://polar-forest-73812.herokuapp.com/recipe/averagerating/${props.recipe._id}`,
     {
       avg: averageRating
     })
+  }
   }, [averageRating])
 
   return(
