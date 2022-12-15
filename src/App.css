@@ -38,6 +38,15 @@ body {
   margin-top: 0;
   justify-content: center;
 }
+.search-form{
+  display:flex;
+  align-items: baseline;
+}
+.searchbar{
+  border-radius: 10px;
+  width:300px;
+  padding:3px;
+}
 
 .card-body{
   display:flex;
@@ -171,7 +180,7 @@ div.card{
 }
 .input {
   width: 80%;
-  border-radius:5px; 
+  border-radius:5px;
 }
 
 .spicy-veggie-icons {
@@ -218,7 +227,7 @@ div.card{
 
 .submit-form {
   text-shadow:2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black;
-  
+
 }
 
 h5 {
@@ -232,7 +241,7 @@ h5 {
   top: 148px;
   padding: 2px 5px;
   font-size: 12px;
- 
+
   border-bottom: none;
   border-top-right-radius: 10px;
   border-top-left-radius: 0px;
@@ -268,4 +277,8 @@ h5 {
 
 .rating-p {
   margin-bottom: 2px;
+}
+
+.btn{
+  border-color: black;
 }

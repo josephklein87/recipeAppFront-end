@@ -194,7 +194,7 @@ function App() {
         setLastSearch('https://polar-forest-73812.herokuapp.com/recipe/timemore')
     })
  }
- 
+
   const handleClearFilter =(e)=>{
     e.preventDefault();
     axios.get('https://polar-forest-73812.herokuapp.com/recipe')
@@ -268,33 +268,33 @@ function App() {
         }
       <br/>
       </div>
-      <h5>search by text</h5>
+      <br/>
       <div className="search-function">
-      <form onSubmit={handleSearchRequest}>
+      <form className="search-form" onSubmit={handleSearchRequest}>
             <input type="text" className="searchbar" placeholder="Search Here" onChange={handleNewSearch} />
-            <input type="submit" value="Search" />
+            <input class="btn btn-light" type="submit" value="Search" />
       </form>
       <form onSubmit={handleClearSearch}>
-          <input type="submit" value="Clear Search"/>
+          <input class="btn btn-light"type="submit" value="Clear Search"/>
       </form>
       </div>
-      <h5> or search by category</h5>
+    <br/>
 
       <div className="filter-function">
           {(user.username) ?
           <>
-          <button onClick={handleFilterMyPosts}>My Posts</button>
-          <button onClick={handleFilterFavs} >Favorites</button>
+          <button type="button" class="btn btn-light" onClick={handleFilterMyPosts}>My Posts</button>
+          <button type="button" class="btn btn-light" onClick={handleFilterFavs} >Favorites</button>
           </>
           :
           null
           }
-          <button onClick={handleFilterRating}>Highest Rated</button>
-          <button onClick={handleFilterVegan}>Vegetarian</button>
-          <button onClick={handleFilterSpicy}>Spicy</button>
-          <button onClick={handleFilterMore}>30+ mins</button>
-          <button onClick={handleFilterLess}>30- mins</button>
-          <button onClick={handleClearFilter}>See All</button>
+          <button type="button" class="btn btn-light" onClick={handleFilterRating}>Highest Rated</button>
+          <button type="button" class="btn btn-light" onClick={handleFilterVegan}>Vegetarian</button>
+          <button type="button" class="btn btn-light" onClick={handleFilterSpicy}>Spicy</button>
+          <button type="button" class="btn btn-light" onClick={handleFilterMore}>30+ mins</button>
+          <button type="button" class="btn btn-light" onClick={handleFilterLess}>30- mins</button>
+          <button type="button" class="btn btn-light" onClick={handleClearFilter}>See All</button>
       </div>
 
 
