@@ -26,6 +26,7 @@ const UserBar = (props) => {
 
     return (
         <div className='user-header'>
+            <h1 className='site-header'>Yes, Chef!</h1>
 
             {(props.user.username) ? 
                 <div className='user-header'>

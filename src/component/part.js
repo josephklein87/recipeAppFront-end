@@ -282,11 +282,11 @@ useEffect(()=>{
   
         </div>
         <div className="card-body">
-          <a href={props.recipe.link} className="btn btn-info">link</a>
-          {((props.user.username === props.recipe.submittedBy && props.user.username !== undefined) || props.user.username==="admin") ?
+          <a href={props.recipe.link} className="btn link-button">Link</a>
+          {((props.user.username === props.recipe.submittedBy && props.user.username !== undefined) || props.user.username==="joeklein") ?
           <>
-            <button className="btn btn-primary" onClick={()=>{revealUpdate(); holdValue()} }>Edit</button>
-            <button className="btn btn-danger"  onClick={()=> {deleteRecipe(props.recipe)}}>Delete</button>
+            <button className="btn edit-button" onClick={()=>{revealUpdate(); holdValue()} }>Edit</button>
+            <button className="btn delete-button"  onClick={()=> {deleteRecipe(props.recipe)}}>Delete</button>
           </>
           :
           null

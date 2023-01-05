@@ -66,7 +66,7 @@ const UserLogin = (props) => {
         <p>username:</p> <input className='form-control' type="text" name="username" onChange={handleNewLoginNameChange}/><br/>
         <p>password:</p> <input className='form-control'type="password" name="password" onChange={handleNewLoginPasswordChange} /><br/>
         <p className='error-message'>{error}</p>
-        <input className='btn btn-primary' type="submit" value="submit" />
+        <input className='btn btn-primary btn-secondary create-acc-btn' type="submit" value="submit" />
       </form>
       </div>
       </div>
