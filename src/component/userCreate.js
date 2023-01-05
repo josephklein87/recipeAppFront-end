@@ -96,7 +96,7 @@ const handleUserCreate = (e) => {
             <p>password:</p>
             <input className="form-control" type="password" name="password" onChange={handleNewPasswordChange} /><br/>
             <p className='error-message'>{error}</p>
-          {(button) ? <input className='btn btn-primary' type="submit" value="submit" disabled/> : <input className='btn btn-primary' type="submit" value="submit" />}
+          {(button) ? <input className='btn btn-secondary create-acc-btn' type="submit" value="submit" disabled/> : <input className='btn btn-secondary create-acc-btn' type="submit" value="submit" />}
           </form>
         </div>
 

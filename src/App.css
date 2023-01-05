@@ -1,24 +1,51 @@
 @font-face {
   font-family: veganStyle;
-  src: url(/public/LemonJellyPersonalUse-dEqR.ttf)
+  src: url(/public/Delhi.ttf)
+}
+
+@font-face {
+  font-family: caviardreams;
+  src: url(/public/CaviarDreams.ttf)
+}
+
+@font-face {
+  font-family: caviardreams-bold;
+  src: url(/public/Caviar_Dreams_Bold.ttf)
 }
 
 body {
   text-align: center;
-  background-color: rgb(116, 146, 227);
+  background-color: white;
+  font-family: caviardreams;
+}
+
+h4 {
+  font-family: caviardreams;
+  font-size: 4vw;
+}
+
+.add-form {
+  font-family: caviardreams-bold;
 }
 
 .submit-form{
-  background-image: url(https://www.cordonbleu.edu/Files/MediaFile/58300.jpg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url('./images/pexels-cottonbro-studio-3296280.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  height: 600px;
   color: white;
 }
 
 .site-header {
   font-family: veganStyle;
-  font-size: 8vw;
+  font-size: calc(12px + 2vw);
+  margin-left: 2vw;
+  margin-bottom: 0;
 }
 
 .site-subheader {
@@ -49,7 +76,8 @@ body {
 
 .new-recipe-submit {
   margin: 1em;
-
+  background-color: white !important;
+  color: black;
 }
 
 .search-function{
@@ -57,14 +85,18 @@ body {
   margin-bottom: .5em;
   margin-top: 0;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .search-form{
   display:flex;
   align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .searchbar{
   border-radius: 10px;
-  width:300px;
+  width: 22vw;
+  min-width: 300px;
   padding:3px;
 }
 
@@ -93,23 +125,54 @@ div.card{
 }
 
 .card-img-top{
-  height:170px;
+  height:250px;
+  object-fit: cover;
+}
+
+.link-button:hover, .delete-button:hover, .edit-button:hover {
+  background-color: lightgray;
+}
+
+.link-button {
+  background-color: #CFACB3;
+}
+
+.delete-button {
+  background-color: #08213F;
+  color: white;
+}
+
+.edit-button {
+  background-color: #E36b51;
 }
 
 .user-header {
   display: flex;
-  justify-content: flex-end;
-  align-items: baseline;
+  justify-content: space-between;
+  align-items: center;
   padding: 5px 0;
-  background-color: rgb(116, 146, 227);
+  background-color: rgb(251, 251, 251);
 }
 
 .user-header p {
   margin: 0 10px;
 }
 
+.create-account-btn-2 {
+  background-color: white;
+  color: black;
+  border: 1px solid black;;
+  font-family: caviardreams;
+  text-transform: uppercase !important;
+}
+
 .create-acc-btn, .login-btn, .logout-btn {
   margin-right: 1em;
+  text-transform:uppercase;
+  background-color: white;
+  color: black;
+  border-color: black;
+  font-size: calc(8px + .5vw);
 }
 
 .create-acc-div {
@@ -200,9 +263,19 @@ div.card{
   display:flex;
   margin-bottom: 1em;
 }
+
 .input {
   width: 80%;
   border-radius:5px;
+  font-family: caviardreams !important;
+  font-size: 10px !important;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.form-control {
+  font-family: caviardreams !important;
+  font-size: calc(10px + .3vw) !important;
 }
 
 .submit-edit-button {
@@ -264,7 +337,7 @@ h5 {
   background-color: white;
   position: absolute;
   left: 0px;
-  top: 148px;
+  top: 230px;
   padding: 2px 5px;
   font-size: 12px;
 
@@ -314,8 +387,12 @@ h5 {
 }
 
 @media (max-width: 768px) {
-  .site-header {
+  /* .site-header {
     font-size: 80px;
+  } */
+  .searchbar {
+    font-size: 12px;
+    height: 40px;
   }
 
   .site-subheader {
@@ -328,5 +405,37 @@ h5 {
     justify-content: center;
     align-items: center;
   }
+}
+
+@media (max-width: 550px) {
+  h4{
+    font-size: 25px;
+  }
+  .edit-div {
+    width:350px;
+    position: absolute;
+    top: 20px;
+  }
+
+  .create-acc-div {
+    width: 350px;
+  }
+
+  .edit-div input {
+    width: 300px;
+    position: relative;
+    right: 25px;
+  }
+  .vegetarian-edit {
+    position: relative;
+    right: 20px;
+  }
+
+  .spicy-edit {
+    position: relative;
+    right: 150px;
+  }
+
+  
 }
 

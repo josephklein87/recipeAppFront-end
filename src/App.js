@@ -97,6 +97,14 @@ function App() {
         .then((res)=>{
           setRecipes(res.data)
           setLastSearch('https://polar-forest-73812.herokuapp.com/recipe')
+          setNewSpicy(false)
+          setNewVegetarian(false)
+          setNewName('')
+          setNewImage('')
+          setNewTime('')
+          setNewImage('')
+          setNewNationality('')
+          setNewLink('')
         })
     })
     e.target.reset()
@@ -237,22 +245,20 @@ function App() {
 
       <div className="submit-form">
 
-      <h1 className='site-header'>Yes, Chef!</h1>
-      <h2 className='site-subheader'>a database of deliciousness</h2>
       <br/>
       {(user.username)
       ?
       <form onSubmit={handleNewRecipeSubmit}>
         <h4 className='submit-recipe-header'>Submit a Recipe</h4>
-          <div className='form-row'>name: <br/><input className="form-control" type="text" placeholder='enter recipe name here' onChange={handleNewNameChange}/></div>
-          <div className='form-row'>image url: <br/><input className="form-control" type="text" placeholder='enter image url here' onChange={handleNewImageChange} /></div>
-          <div className='form-row'>time to prepare: <br/><input className="form-control" type="text" placeholder='enter time in minutes here' onChange={handleNewTimeChange} /></div>
-          <div className='form-row'>main ingredient: <br/><input className="form-control" type="text" placeholder='enter main ingredient here' onChange={handleNewIngredientChange} /></div>
-          <div className='form-row'>nationality: <br/><input className="form-control" type="text" placeholder="enter recipe nationality here" onChange={handleNewNationalityChange} /></div>
-          <div className='form-row'>link to recipe: <br/><input className="form-control" type="text" placeholder="enter link to recipe here" onChange={handleNewLinkChange} /></div>
+          <div className='form-row add-form'>name: <br/><input className="form-control" type="text" placeholder='enter recipe name here' onChange={handleNewNameChange}/></div>
+          <div className='form-row add-form'>image url: <br/><input className="form-control" type="text" placeholder='enter image url here' onChange={handleNewImageChange} /></div>
+          <div className='form-row add-form'>time to prepare: <br/><input className="form-control" type="text" placeholder='enter time in minutes here' onChange={handleNewTimeChange} /></div>
+          <div className='form-row add-form'>main ingredient: <br/><input className="form-control" type="text" placeholder='enter main ingredient here' onChange={handleNewIngredientChange} /></div>
+          <div className='form-row add-form'>nationality: <br/><input className="form-control" type="text" placeholder="enter recipe nationality here" onChange={handleNewNationalityChange} /></div>
+          <div className='form-row add-form'>link to recipe: <br/><input className="form-control" type="text" placeholder="enter link to recipe here" onChange={handleNewLinkChange} /></div>
           <div className='form-row veggie-spicy'>
-            <div className='veggie'>vegetarian? <input type="checkbox" onChange={handleNewVegetarianChange} /></div>
-            <div className='spicy'>spicy? <input type="checkbox" onChange={handleNewSpicyChange} /></div>
+            <div className='veggie add-form'>vegetarian? <input type="checkbox" onChange={handleNewVegetarianChange} /></div>
+            <div className='spicy add-form'>spicy? <input type="checkbox" onChange={handleNewSpicyChange} /></div>
           </div>
           <input className='btn btn-primary new-recipe-submit' type="submit" value="Post Recipe!"/>
       </form>
@@ -260,9 +266,9 @@ function App() {
       <div className='post-ternary-negative'>
         <h4>Want to post a recipe?</h4>
         <div className='login-or-create-div'>
-        <button className='btn btn-success' onClick={revealSignUp}>Create an Account</button>
+        <button className='btn btn-secondary create-account-btn-2' onClick={revealSignUp}>Create an Account</button>
         <p className='or'>or</p>
-        <button className='btn btn-success' onClick={revealLogin}>Login</button>
+        <button className='btn btn-secondary create-account-btn-2' onClick={revealLogin}>Login</button>
         </div>
       </div>
         }
@@ -271,7 +277,7 @@ function App() {
       <br/>
       <div className="search-function">
       <form className="search-form" onSubmit={handleSearchRequest}>
-            <input type="text" className="searchbar" placeholder="Search Here" onChange={handleNewSearch} />
+            <input type="text" className="searchbar" placeholder="What do you want to make?" onChange={handleNewSearch} />
             <input class="btn btn-light" type="submit" value="Search" />
       </form>
       <form onSubmit={handleClearSearch}>
